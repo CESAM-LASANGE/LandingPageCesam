@@ -38,3 +38,15 @@ Resultado frente ao budget:
 - **LCP:** não piorou. O elemento LCP continua sendo o logo, e não as fotos.
 - **Peso total:** 892 KiB, dentro do limite de ≤ 1 MiB. A primeira versão do carrossel baixava as 3 fotos e chegava a 1.053 KiB; isso foi corrigido montando só a foto visível e a próxima.
 - **Acessibilidade, SEO e boas práticas:** sem queda.
+
+## Medição em produção (Vercel, com compressão) — 2026-10-09
+
+URL: `https://cesamuems.vercel.app/`. Lighthouse 12, Chromium headless; mobile = mediana de 3 execuções.
+
+| Perfil                | Performance | Acessib. | Boas práticas | SEO | LCP   | CLS | TBT   | Peso total |
+| --------------------- | ----------- | -------- | ------------- | --- | ----- | --- | ----- | ---------- |
+| Mobile (mediana de 3) | 96          | 100      | 100           | 100 | 2,8 s | 0   | 72 ms | 417 KiB    |
+| Desktop               | 100         | 100      | 100           | 100 | 0,6 s | 0   | 0 ms  | 485 KiB    |
+
+- Dentro do budget: CLS 0 (≤ 0,05), peso inicial 417–485 KiB (≤ 1 MiB), LCP melhor que antes (5,0 s → 2,8 s no mobile) por causa da compressão e do cache da CDN.
+- Os cabeçalhos de segurança (CSP, HSTS, X-Frame-Options etc.) vêm de `vercel.json`; sem erros de CSP no console nas páginas da home, da lista e de uma notícia; o mapa carrega depois do clique.
