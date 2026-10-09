@@ -171,3 +171,11 @@ describe('Cabeçalho, tarja e rodapé (pedidos da coordenação, 2026-10-09)', (
     });
   });
 });
+
+describe('Hero (pedido da coordenação, 2026-10-09)', () => {
+  it('não mostra o cartão "Análises de água e efluentes" sobre a ilustração', () => {
+    renderPage();
+    expect(screen.queryByText(/Análises de água e efluentes/)).toBeNull();
+    expect(screen.queryByText('[Unidade / Campus] · MS')).toBeNull();
+  });
+});

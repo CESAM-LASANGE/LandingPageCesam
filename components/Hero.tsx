@@ -101,11 +101,6 @@ export function Hero() {
               strokeWidth="1.5"
             />
           </svg>
-          <div className={styles.card}>
-            <span className={styles.cardEyebrow}>{hero.card.eyebrow}</span>
-            <span className={styles.cardTitle}>{hero.card.title}</span>
-            <span className={styles.cardPlace}>{hero.card.place}</span>
-          </div>
         </div>
       </div>
     </section>

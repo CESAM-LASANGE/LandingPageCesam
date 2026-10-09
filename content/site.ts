@@ -90,7 +90,6 @@ export const hero = {
   lead: site.description,
   primaryCta: { label: 'Conheça nossa pesquisa', href: '#pesquisa' },
   secondaryCta: { label: 'Fale com o centro', href: '#contato' },
-  card: { eyebrow: 'Laboratório', title: 'Análises de água e efluentes', place: '[Unidade / Campus] · MS' },
 };
 
 export const stats: Stat[] = [
