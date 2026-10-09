@@ -1,5 +1,14 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, IBM_Plex_Mono, Michroma, Public_Sans, Source_Sans_3, Space_Grotesk } from 'next/font/google';
+import {
+  Fraunces,
+  IBM_Plex_Mono,
+  IBM_Plex_Sans,
+  Michroma,
+  Public_Sans,
+  Source_Sans_3,
+  Space_Grotesk,
+  Spectral,
+} from 'next/font/google';
 import { site } from '@/content/site';
 import './globals.css';
 
@@ -30,6 +39,22 @@ const plexMono = IBM_Plex_Mono({
   display: 'swap',
 });
 
+// Identidade do Portal de Resíduos Sólidos (card em Plataformas). Sem preload: só aparecem abaixo da dobra.
+const spectral = Spectral({
+  weight: '600',
+  subsets: ['latin'],
+  variable: '--font-spectral',
+  display: 'swap',
+  preload: false,
+});
+const plexSans = IBM_Plex_Sans({
+  weight: ['400', '600'],
+  subsets: ['latin'],
+  variable: '--font-plex-sans',
+  display: 'swap',
+  preload: false,
+});
+
 const title = `${site.name} · ${site.fullName} | ${site.institutionShort}`;
 
 export const metadata: Metadata = {
@@ -57,7 +82,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: '#177A35' };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const fonts = [michroma, spaceGrotesk, sourceSans, fraunces, publicSans, plexMono].map((f) => f.variable).join(' ');
+  const fonts = [michroma, spaceGrotesk, sourceSans, fraunces, publicSans, plexMono, spectral, plexSans]
+    .map((f) => f.variable)
+    .join(' ');
   return (
     <html lang="pt-BR" className={fonts}>
       <body>{children}</body>

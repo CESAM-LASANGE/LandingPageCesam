@@ -36,6 +36,21 @@
   --obs-muted: #b8cbe0;
   --obs-cta: #18765a;
 
+  /* Portal de Resíduos Sólidos ("Dossiê público": papel, mata e cerrado) */
+  --res-paper: #f5f3ec;
+  --res-paper-raised: #fbfaf5;
+  --res-paper-sunk: #ece9de;
+  --res-ink: #1a231e;
+  --res-ink-soft: #55605a;
+  --res-ink-faint: #636a61;
+  --res-mata: #1b4b3a;
+  --res-mata-deep: #12352a;
+  --res-cerrado: #b0742e;
+  --res-cerrado-texto: #8a5a1f;
+  --res-warning-bg: #f6ecdc;
+  --res-line: #e0dccd;
+  --res-line-strong: #cec8b4;
+
   /* Tipografia */
   --font-label: var(--font-michroma), sans-serif;
   --font-display: var(--font-space-grotesk), system-ui, sans-serif;
@@ -43,6 +58,8 @@
   --font-obs-display: var(--font-fraunces), Georgia, serif;
   --font-obs-body: var(--font-public-sans), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-res-display: var(--font-spectral), Georgia, serif;
+  --font-res-body: var(--font-plex-sans), system-ui, sans-serif;
 
   --fs-h1: clamp(2.125rem, 1.1rem + 3vw, 3.75rem);
   --fs-h2: clamp(1.875rem, 1.25rem + 1.7vw, 2.75rem);

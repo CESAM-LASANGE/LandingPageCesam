@@ -23,6 +23,8 @@ Implementação dos tokens: `app/globals.css`.
 
 O card do Observatório usa a identidade própria da plataforma (`--obs-*`, Fraunces, Public Sans, IBM Plex Mono).
 
+O card do Portal de Resíduos Sólidos também usa a identidade própria do portal ("Dossiê público", em `docs/design-refactor` do repositório do portal): tokens `--res-*` (papel `#f5f3ec`, mata `#1b4b3a`, cerrado `#b0742e`), Spectral nos títulos, IBM Plex Sans no texto e IBM Plex Mono nos rótulos, cantos de 3–4 px e o logo do projeto. Enquanto o portal não está no ar, mostra o selo "Em breve" no estilo de aviso do próprio portal (`--warning`), em vez de link; com `platforms.residuos.href` preenchido, o card vira link e o aviso some.
+
 ## Tipografia
 
 - **Michroma**: só rótulos curtos (eyebrows), em caixa alta, 10–12 px, tracking 0.18em.

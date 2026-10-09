@@ -5,53 +5,57 @@ import { SectionHeader } from './SectionHeader';
 import styles from './Platforms.module.css';
 
 const tiles = buildTiles();
-const recycle =
-  'M7.5 5.5L10 2l2.5 3.5M10 2v5a4 4 0 0 0 4 4M20.5 13l-1.8 4-4.2-.4M18.7 17l-4.3-2.5a4 4 0 0 0-5.5 1.5M5.8 18.5L3.5 15l2-3.8M3.5 15l4.3-2.5a4 4 0 0 0 1.5-5.5';
-
 export function Platforms() {
   const { observatorio: obs, residuos } = platforms;
+  const noAr = Boolean(residuos.href);
 
   const residuosBody = (
     <>
-      <svg className={styles.spin} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d={recycle} />
-      </svg>
-      <div className={styles.row}>
-        <span className={styles.badge}>
-          <span className={styles.dot} />
-          {residuos.badge}
+      <div className={styles.resTop}>
+        <span className={styles.resLogo}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- imagem estática */}
+          <img src="/images/residuos-logo.webp" alt={residuos.name} width={410} height={85} loading="lazy" />
         </span>
-        <span className={styles.roundIcon}>
-          <Icon name="arrowUpRight" size={20} strokeWidth={2.2} className="go" />
-        </span>
+        {noAr ? (
+          <span className={styles.resArrow}>
+            <Icon name="arrowUpRight" size={20} strokeWidth={2.2} className="go" />
+          </span>
+        ) : (
+          <span className={styles.resBadge}>
+            <span className={styles.resDot} aria-hidden="true" />
+            {residuos.badge}
+          </span>
+        )}
       </div>
-      <div className={styles.text}>
+      <div className={styles.resText}>
+        <p className={styles.resKicker}>{residuos.kicker}</p>
         <h3 className={styles.resTitle}>{residuos.title}</h3>
-        <p className={styles.resText}>{residuos.text}</p>
+        <p className={styles.resLead}>{residuos.text}</p>
       </div>
-      <div className={styles.resIcon}>
-        <svg
-          width="48"
-          height="48"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d={recycle} />
-        </svg>
-      </div>
+      <dl className={styles.resFigures}>
+        {residuos.figures.map((f) => (
+          <div key={f.label}>
+            <dt className="visually-hidden">{f.label}</dt>
+            <dd className={styles.resFigure}>{f.value}</dd>
+            <dd className={styles.resFigureLabel} aria-hidden="true">
+              {f.label}
+            </dd>
+          </div>
+        ))}
+      </dl>
       <ul className={styles.resThemes}>
         {residuos.themes.map((t) => (
           <li key={t}>{t}</li>
         ))}
       </ul>
-      <span className={styles.resCta}>
-        {residuos.cta} <span className="go">→</span>
-      </span>
+      {noAr ? (
+        <span className={styles.resCta}>
+          {residuos.cta} <span className="go">→</span>
+        </span>
+      ) : (
+        <p className={styles.resStatus}>{residuos.status}</p>
+      )}
+      <p className={styles.resCredit}>{residuos.credit}</p>
     </>
   );
 
@@ -124,9 +128,7 @@ export function Platforms() {
               {residuosBody}
             </a>
           ) : (
-            <article className={`reveal ${styles.card} ${styles.res}`} data-pending-link="">
-              {residuosBody}
-            </article>
+            <article className={`reveal ${styles.card} ${styles.res}`}>{residuosBody}</article>
           )}
         </div>
       </div>

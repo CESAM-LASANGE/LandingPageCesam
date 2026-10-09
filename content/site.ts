@@ -117,13 +117,22 @@ export const platforms = {
     themes: ['Água', 'Esgoto', 'Resíduos', 'Águas pluviais', 'Gestão'],
     cta: 'Acessar o Observatório',
   },
+  // Textos e números vêm do próprio Portal Resíduos MS (página inicial e rodapé do portal).
   residuos: {
-    badge: 'Portal · resíduos sólidos',
-    title: 'Portal de Resíduos Sólidos',
-    text: '[Descrição curta do portal: o que reúne e para quem é.]',
-    themes: ['[Tema 1]', '[Tema 2]', '[Tema 3]'],
+    name: 'Portal Resíduos MS',
+    kicker: 'Projeto Disposição Legal',
+    badge: 'Em breve',
+    title: 'Informação para dar o destino certo.',
+    text: 'Dados, ferramentas e cooperação para uma disposição final ambientalmente adequada dos resíduos sólidos em Mato Grosso do Sul.',
+    figures: [
+      { value: '79', label: 'municípios no diagnóstico inicial' },
+      { value: '80% → 5%', label: 'com disposição inadequada, em oito anos' },
+    ],
+    themes: ['Disposição legal', 'Cooperativas', 'Logística reversa', 'Publicações'],
+    status: 'Estamos finalizando o portal. Em breve ele estará disponível aqui.',
+    credit: 'Projeto Disposição Legal · MPMS + UEMS',
     cta: 'Acessar o portal',
-    // PENDENTE: endereço do portal.
+    // Quando o portal for ao ar, informe o endereço aqui: o card passa a ser um link e o aviso "Em breve" some.
     href: undefined as string | undefined,
   },
 };

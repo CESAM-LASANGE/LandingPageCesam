@@ -89,6 +89,6 @@ Fonte: `content/site.ts` (buscar `PENDENTE` e `[`).
 - Projetos, equipe, coordenação, Lattes, publicações e DOIs, notícias e imagens reais.
 - ~~Endereço, e-mail institucional, telefone e mapa~~ (resolvido em 2026-10-08: cesam@uems.br, (67) 3902-2547, UEMS em Dourados e mapa do Google). Ainda pendentes: rua, número e CEP, se a coordenação quiser mostrá-los, e o horário de atendimento.
 - Foto da equipe e unidade/campus do laboratório.
-- URLs: Portal de Resíduos Sólidos, Acessibilidade, Pró-Reitoria de Pesquisa, Pós-graduação, Instagram, YouTube, Diretório CNPq, páginas "ver todos".
+- URLs: endereço do Portal de Resíduos Sólidos (o card já existe, com o aviso "Em breve", e vira link quando `platforms.residuos.href` for preenchido), Acessibilidade, Pró-Reitoria de Pesquisa, Pós-graduação, Instagram, YouTube, Diretório CNPq, páginas "ver todos".
 - Validação dos textos do design (hero, sobre, missão/visão/valores, linhas de pesquisa).
 - Domínio definitivo (`site.url`, hoje o endereço provisório `cesamuems.vercel.app`; troque por `NEXT_PUBLIC_SITE_URL` na Vercel).
