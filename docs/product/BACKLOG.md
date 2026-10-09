@@ -15,6 +15,7 @@ Ordem pensada para que cada etapa sirva de base para a seguinte. Cada etapa pass
 | 8   | Publicações: lista + página + PDF com prazo          | SPEC-006                       | 2, 7       | artigos, licenças e prazos                |
 | 9   | Notícias: carrossel + lista + página                 | SPEC-007                       | 4, 2, 3    | artboard aprovado + notícias              |
 | 10  | Build agendado diário                                | SPEC-006 RP-03, SPEC-007 FR-04 | 8, 9       | decisão de hospedagem                     |
+| 11  | Compartilhar notícias (foto de capa, no celular)     | SPEC-008, ADR-004              | 9          | — (decisões D-1 a D-6 respondidas)        |
 
 ## Materiais a receber da coordenação
 

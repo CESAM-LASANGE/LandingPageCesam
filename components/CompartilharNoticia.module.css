@@ -1,0 +1,45 @@
+.bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: var(--radius-xl);
+  background: var(--green-soft);
+}
+.titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+.apoio {
+  font-size: 0.9375rem;
+  color: var(--text);
+}
+.acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.acoes :global(.btn) {
+  width: 100%;
+}
+.acoes button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+.status {
+  min-height: 1.5em;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+@media (min-width: 560px) {
+  .acoes {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .acoes :global(.btn) {
+    width: auto;
+  }
+}

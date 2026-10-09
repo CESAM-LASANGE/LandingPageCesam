@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { dataPorExtenso, ROTULO_CATEGORIA, type FotoNoticia, type Noticia } from '@/content/noticias';
 import { fotoDoManifesto } from '@/lib/fotos';
+import { CompartilharNoticia } from './CompartilharNoticia';
 import { Foto } from './Foto';
 import { NoticiaCard } from './NoticiaCard';
 import styles from './NoticiaArtigo.module.css';
@@ -78,6 +79,8 @@ export function NoticiaArtigo({ noticia, outras }: Props) {
             ),
           )}
         </div>
+
+        <CompartilharNoticia noticia={noticia} />
 
         {noticia.galeria && noticia.galeria.length > 0 && (
           // Até 2 fotos: lado a lado, no formato natural. 3 ou mais: grade de quadros 4:3, com fotos em pé inteiras.
