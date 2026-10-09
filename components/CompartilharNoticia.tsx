@@ -8,7 +8,6 @@ import {
   nomeDoArquivo,
   urlDaCapaParaCompartilhar,
   urlDaNoticia,
-  urlDoWhatsApp,
 } from '@/lib/compartilhar';
 import styles from './CompartilharNoticia.module.css';
 
@@ -143,9 +142,6 @@ export function CompartilharNoticia({ noticia, converter = fotoComoJpeg }: Props
         <button type="button" className="btn btn--ghost" onClick={copiarLegenda}>
           Copiar legenda
         </button>
-        <a className="btn btn--ghost" href={urlDoWhatsApp(noticia)} target="_blank" rel="noopener noreferrer">
-          Enviar pelo WhatsApp<span className="visually-hidden"> (abre em nova aba)</span>
-        </a>
       </div>
       <p className={styles.status} role="status">
         {aviso}

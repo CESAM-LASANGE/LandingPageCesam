@@ -87,15 +87,6 @@ test.describe('com toque (celular)', () => {
     expect((await download).suggestedFilename()).toBe('cesam-tcc-ana-laura-papel-higienico-no-vaso-sanitario.jpg');
   });
 
-  test('o link do WhatsApp abre em nova aba com o endereço da notícia', async ({ page }) => {
-    await page.goto(SLUG);
-    const link = page.getByRole('link', { name: /Enviar pelo WhatsApp/ });
-    await link.scrollIntoViewIfNeeded();
-    await expect(link).toHaveAttribute('target', '_blank');
-    const texto = new URL((await link.getAttribute('href'))!).searchParams.get('text');
-    expect(texto).toContain(SLUG);
-  });
-
   test('sem overflow, alvos de 44 px e sem violações de acessibilidade (RWD-01, RWD-02, T-05)', async ({ page }) => {
     await simularRecursos(page);
     await page.goto(SLUG);

@@ -17,11 +17,6 @@ export function montarLegenda(n: DadosDaNoticia): string {
   return `${n.titulo}\n\n${n.resumo}\n\nLeia a notícia: ${urlDaNoticia(n.slug)}`;
 }
 
-/** Link do WhatsApp com título e endereço da notícia (SPEC-008 FR-05). */
-export function urlDoWhatsApp(n: DadosDaNoticia): string {
-  return `https://wa.me/?text=${encodeURIComponent(`${n.titulo}\n${urlDaNoticia(n.slug)}`)}`;
-}
-
 export function nomeDoArquivo(slug: string): string {
   return `cesam-${slug}.jpg`;
 }

@@ -35,18 +35,16 @@ describe('Compartilhar notícia (SPEC-008)', () => {
   describe('com toque (celular)', () => {
     beforeEach(() => mockMatchMedia({ '(pointer: coarse)': true }));
 
-    it('mostra as quatro ações, com o link do WhatsApp apontando para a notícia', () => {
+    it('mostra as três ações', () => {
       definirNavigator({ share: vi.fn() });
       abrir();
       expect(screen.getByRole('button', { name: /Compartilhar a notícia/ })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'Baixar a foto' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'Copiar legenda' })).toBeInTheDocument();
-      const whatsapp = screen.getByRole('link', { name: /Enviar pelo WhatsApp/ });
-      expect(whatsapp).toHaveAttribute('target', '_blank');
-      expect(new URL(whatsapp.getAttribute('href')!).searchParams.get('text')).toContain(urlDaNoticia(n.slug));
+      expect(screen.queryByRole('link', { name: /WhatsApp/ })).toBeNull();
     });
 
-    it('prepara a foto uma única vez, quando o bloco aparece, e não antes (FR-07)', async () => {
+    it('prepara a foto uma única vez, quando o bloco aparece, e não antes (FR-06)', async () => {
       definirNavigator({ share: vi.fn(), canShare: () => true });
       const converter = abrir();
       await waitFor(() => expect(converter).toHaveBeenCalledTimes(1));
@@ -84,7 +82,7 @@ describe('Compartilhar notícia (SPEC-008)', () => {
       expect(share).toHaveBeenCalledWith({ title: n.titulo, text: n.resumo, url: urlDaNoticia(n.slug) });
     });
 
-    it('cancelar o menu não mostra erro (FR-06)', async () => {
+    it('cancelar o menu não mostra erro (FR-05)', async () => {
       definirNavigator({
         share: vi.fn().mockRejectedValue(new DOMException('cancelado', 'AbortError')),
         canShare: () => true,
@@ -101,12 +99,11 @@ describe('Compartilhar notícia (SPEC-008)', () => {
       expect(screen.getByRole('status')).toHaveTextContent('Baixe a foto e copie a legenda');
     });
 
-    it('sem menu nativo, não oferece "Compartilhar", mas mantém baixar, copiar e WhatsApp', () => {
+    it('sem menu nativo, não oferece "Compartilhar", mas mantém baixar e copiar', () => {
       abrir();
       expect(screen.queryByRole('button', { name: /Compartilhar a notícia/ })).toBeNull();
       expect(screen.getByRole('button', { name: 'Baixar a foto' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: 'Copiar legenda' })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /WhatsApp/ })).toBeInTheDocument();
     });
 
     it('copia a legenda com título, resumo e link e confirma (FR-04)', async () => {

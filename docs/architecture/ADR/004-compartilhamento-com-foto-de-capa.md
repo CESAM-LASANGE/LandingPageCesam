@@ -18,8 +18,8 @@ Pontos de partida:
 ## Decisão
 
 1. **Compartilhar = foto de capa + título + resumo + link da notícia.** Não há arte gerada, nem rota nova de imagem, nem `next/og`.
-2. **Um bloco "Compartilhar" na página da notícia**, só em aparelhos com toque (`pointer: coarse`), com quatro ações: compartilhar pelo menu do celular, baixar a foto, copiar a legenda e enviar pelo WhatsApp.
-3. **Menu do celular (Web Share API) para chegar ao Instagram.** O Instagram não tem endereço de compartilhamento na web; o menu nativo é o único caminho, e a pessoa escolhe o Instagram nele. O WhatsApp também recebe a foto pelo menu e tem, além disso, o link `https://wa.me/?text=…`.
+2. **Um bloco "Compartilhar" na página da notícia**, só em aparelhos com toque (`pointer: coarse`), com três ações: compartilhar pelo menu do celular, baixar a foto e copiar a legenda.
+3. **Menu do celular (Web Share API) para chegar ao Instagram.** O Instagram não tem endereço de compartilhamento na web; o menu nativo é o único caminho, e a pessoa escolhe o Instagram nele. O WhatsApp também recebe a foto pelo mesmo menu, então não há botão separado para ele.
 4. **A foto vira JPEG no próprio celular, só quando o bloco entra na tela.** O site baixa a maior versão WebP da capa que já existe, redimensiona para no máximo 1080 px de largura e converte para JPEG (via `canvas`), porque o WebP nem sempre é aceito pelo menu de compartilhamento nem pelo Instagram. Nenhum arquivo novo é criado, guardado ou publicado.
 5. **Nada é carregado com a página.** A foto só é preparada quando o bloco "Compartilhar" aparece na tela, para que o menu do celular abra na hora do toque (o iPhone recusa o menu se ele demorar a abrir depois do toque). Quem não chega ao bloco não baixa nada.
 6. **Nenhum serviço de terceiros**: sem SDK de rede social, sem rastreamento, sem armazenamento externo (coerente com o ADR-003).
@@ -42,5 +42,5 @@ Pontos de partida:
   - as capas são paisagem (por exemplo 4:3 ou 16:9) e o Stories é vertical, então o Instagram mostra faixas ou pede um recorte; isso é feito pela própria pessoa na hora de postar;
   - o Instagram ignora a legenda enviada pelo menu; por isso existe o botão "Copiar legenda";
   - o adesivo de link do Stories não pode ser pré-colocado;
-  - se o aparelho não aceitar arquivos no menu, restam "Baixar a foto", "Copiar legenda" e o WhatsApp.
+  - se o aparelho não aceitar arquivos no menu, restam "Baixar a foto" e "Copiar legenda".
 - **Reversibilidade:** alta. Remover o componente devolve o site ao estado anterior, sem migração de dados.

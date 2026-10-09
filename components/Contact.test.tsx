@@ -20,7 +20,7 @@ describe('Contato · dados do CESAM', () => {
 
   it('mostra o endereço da UEMS em Dourados, sem placeholders', () => {
     render(<Contact />);
-    const secao = screen.getByRole('region', { name: 'Fale com o CESAM' });
+    const secao = screen.getByRole('region', { name: 'CESAM' });
     expect(within(secao).getByText(contact.address)).toBeInTheDocument();
     expect(contact.address).toMatch(/UEMS.*Dourados – MS/);
     expect(within(secao).queryByText(/\[/)).toBeNull();

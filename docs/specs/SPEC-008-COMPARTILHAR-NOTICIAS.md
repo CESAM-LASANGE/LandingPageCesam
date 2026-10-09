@@ -25,7 +25,7 @@ Qualquer pessoa que apareça numa notícia (por exemplo, quem defendeu um TCC) d
 
 ## O que a tecnologia permite e o que não permite
 
-- O **WhatsApp** aceita um link com o texto pronto. Para enviar a foto, é preciso usar o menu de compartilhamento do celular.
+- O **WhatsApp** também recebe a foto, o título e o link pelo mesmo menu de compartilhamento do celular; por isso não há botão separado para ele (decisão da coordenação, 2026-10-09).
 - O **Instagram não tem endereço de compartilhamento na web.** O único caminho é o menu nativo do celular (Web Share API), onde a pessoa escolhe o Instagram e depois Stories, Feed ou mensagem. O site não escolhe esse destino.
 - O Instagram **ignora a legenda** enviada pelo menu. Por isso existe "Copiar legenda".
 - As capas são **paisagem** e o Stories é **vertical**: o Instagram mostra faixas ou pede um recorte, e a pessoa ajusta na hora de postar.
@@ -38,11 +38,10 @@ Qualquer pessoa que apareça numa notícia (por exemplo, quem defendeu um TCC) d
 - FR-02: "Compartilhar a notícia" abre o menu nativo com a foto de capa (JPEG), o título, o resumo e o link canônico. Se o aparelho não aceitar arquivos mas aceitar o menu, compartilha só título, resumo e link. Se não houver menu nativo, o botão não aparece.
 - FR-03: "Baixar a foto" baixa a capa como `cesam-<slug>.jpg`. Aparece sempre que o bloco aparece.
 - FR-04: "Copiar legenda" copia: título, linha em branco, resumo, linha em branco e `Leia a notícia: <link>`. Confirma com mensagem.
-- FR-05: "Enviar pelo WhatsApp" abre `https://wa.me/?text=<título + link>`, em nova aba.
-- FR-06: se a pessoa cancelar o menu nativo, nada é mostrado como erro.
-- FR-07: a foto só é preparada quando o bloco "Compartilhar" entra na tela (quem não chega até ele não baixa nada) e é reaproveitada nos toques. Isso faz o menu abrir logo após o toque, o que o iPhone exige. A página não carrega nada extra no início.
-- FR-08: a foto enviada é convertida para JPEG de no máximo 1080 px de largura, no próprio aparelho, a partir da maior versão WebP já publicada da capa. Nenhum arquivo novo é criado no site.
-- FR-09: sem alteração de conteúdo: uma notícia nova ganha o bloco só por ter uma capa.
+- FR-05: se a pessoa cancelar o menu nativo, nada é mostrado como erro.
+- FR-06: a foto só é preparada quando o bloco "Compartilhar" entra na tela (quem não chega até ele não baixa nada) e é reaproveitada nos toques. Isso faz o menu abrir logo após o toque, o que o iPhone exige. A página não carrega nada extra no início.
+- FR-07: a foto enviada é convertida para JPEG de no máximo 1080 px de largura, no próprio aparelho, a partir da maior versão WebP já publicada da capa. Nenhum arquivo novo é criado no site.
+- FR-08: sem alteração de conteúdo: uma notícia nova ganha o bloco só por ter uma capa.
 
 ## Requisitos visuais
 
@@ -70,7 +69,7 @@ Qualquer pessoa que apareça numa notícia (por exemplo, quem defendeu um TCC) d
 
 - Loading: botão com "Preparando a foto…" enquanto a imagem é convertida.
 - Empty: sem toque, o bloco não existe (FR-01). Com toque, só aparecem as ações que funcionam.
-- Error: falha ao preparar a foto → mensagem em `role="status"`; "Baixar a foto", "Copiar legenda" e WhatsApp seguem disponíveis. Falha ao copiar → mensagem pedindo para copiar manualmente.
+- Error: falha ao preparar a foto → mensagem em `role="status"`; "Baixar a foto" e "Copiar legenda" seguem disponíveis. Falha ao copiar → mensagem pedindo para copiar manualmente.
 - Success: menu nativo aberto; "Legenda copiada" ou "Foto baixada" nos demais botões.
 
 ## Crescimento: o que impede o site de ficar pesado
@@ -93,7 +92,7 @@ Qualquer pessoa que apareça numa notícia (por exemplo, quem defendeu um TCC) d
 
 ## Testes determinísticos
 
-- T-01 (unit): montagem da legenda, link do WhatsApp, nome do arquivo, link absoluto da notícia.
+- T-01 (unit): montagem da legenda, nome do arquivo, link absoluto da notícia.
 - T-02 (unit, componente): `navigator.share` e `canShare` simulados — caminho feliz com arquivo, sem suporte a arquivo, cancelamento (`AbortError`), falha, bloco ausente sem toque.
 - T-03 (e2e, 390 px com toque): o bloco aparece; "Copiar legenda" confirma; `navigator.share` simulado recebe um arquivo `image/jpeg`; "Baixar a foto" inicia um download.
 - T-04 (e2e, 1440 px): o bloco não existe.
