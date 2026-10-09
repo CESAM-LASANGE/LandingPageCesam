@@ -23,6 +23,17 @@ describe('Notícias na home (SPEC-007)', () => {
     expect(link).not.toHaveAttribute('target');
   });
 
+  it('oferece o link para a lista completa de notícias, e só quando há notícias', () => {
+    const { unmount } = render(<News lista={[tcc]} />);
+    expect(screen.getByRole('link', { name: /Ver todas as notícias/ })).toHaveAttribute(
+      'href',
+      expect.stringMatching(/^\/noticias\/?$/),
+    );
+    unmount();
+    render(<News lista={[]} />);
+    expect(screen.queryByRole('link', { name: /Ver todas as notícias/ })).toBeNull();
+  });
+
   it('mostra a foto de capa com descrição', () => {
     render(<News lista={[tcc]} />);
     expect(screen.getByRole('img', { name: tcc.capa.alt })).toBeInTheDocument();

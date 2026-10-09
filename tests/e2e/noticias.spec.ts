@@ -33,7 +33,7 @@ test('a página mostra o texto completo, as fotos e a trilha', async ({ page }) 
   }
   await expect(
     page.getByRole('navigation', { name: 'Trilha de navegação' }).getByRole('link', { name: 'Notícias' }),
-  ).toHaveAttribute('href', '/#noticias');
+  ).toHaveAttribute('href', '/noticias/');
 });
 
 test('metadados e dados estruturados da notícia (SEO-01, SEO-02)', async ({ page }) => {
@@ -168,5 +168,35 @@ test.describe('página do curso de sonômetro', () => {
     const resultado = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
     expect(resultado.violations.map((v) => v.id)).toEqual([]);
     await expect(page.getByRole('region', { name: 'Outras notícias' }).getByRole('link')).toHaveCount(2);
+  });
+});
+
+test.describe('Lista de notícias (/noticias/)', () => {
+  test('a home leva à lista e a lista leva a cada notícia', async ({ page }) => {
+    await page.goto('/');
+    await page
+      .locator('#noticias')
+      .getByRole('link', { name: /Ver todas as notícias/ })
+      .click();
+    await expect(page).toHaveURL(/\/noticias\/$/);
+    await expect(page.getByRole('heading', { level: 1, name: 'Todas as notícias' })).toBeVisible();
+    await expect(page.getByRole('list', { name: 'Notícias do CESAM' }).getByRole('listitem')).toHaveCount(3);
+    await page.getByRole('link', { name: TITULO }).click();
+    await expect(page).toHaveURL(new RegExp(`${SLUG}$`));
+  });
+
+  test('sem erros de console, sem overflow e sem violações de acessibilidade', async ({ page }) => {
+    const erros: string[] = [];
+    page.on('console', (m) => m.type() === 'error' && erros.push(m.text()));
+    page.on('pageerror', (e) => erros.push(e.message));
+    await page.goto('/noticias/');
+    await page.mouse.wheel(0, 20000);
+    await page.waitForLoadState('networkidle');
+    expect(erros).toEqual([]);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(0);
+    const resultado = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
+    expect(resultado.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`)).toEqual(
+      [],
+    );
   });
 });

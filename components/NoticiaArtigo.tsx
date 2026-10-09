@@ -49,7 +49,7 @@ export function NoticiaArtigo({ noticia, outras }: Props) {
         <nav aria-label="Trilha de navegação" className={styles.trilha}>
           <Link href="/">Início</Link>
           <span aria-hidden="true"> / </span>
-          <Link href="/#noticias">Notícias</Link>
+          <Link href="/noticias/">Notícias</Link>
           <span aria-hidden="true"> / </span>
           <span aria-current="page" className={styles.atual}>
             {noticia.titulo}
@@ -97,7 +97,7 @@ export function NoticiaArtigo({ noticia, outras }: Props) {
         )}
 
         <p className={styles.voltar}>
-          <Link href="/#noticias" className="more">
+          <Link href="/noticias/" className="more">
             <span aria-hidden="true">←</span> Voltar para as notícias
           </Link>
         </p>

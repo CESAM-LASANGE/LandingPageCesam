@@ -20,7 +20,10 @@ describe('Página da notícia (SPEC-007 FR-03)', () => {
     render(<NoticiaArtigo noticia={tcc} outras={[]} />);
     const trilha = screen.getByRole('navigation', { name: 'Trilha de navegação' });
     expect(within(trilha).getByRole('link', { name: 'Início' })).toHaveAttribute('href', '/');
-    expect(within(trilha).getByRole('link', { name: 'Notícias' })).toHaveAttribute('href', '/#noticias');
+    expect(within(trilha).getByRole('link', { name: 'Notícias' })).toHaveAttribute(
+      'href',
+      expect.stringMatching(/^\/noticias\/?$/),
+    );
     expect(within(trilha).getByText(tcc.titulo)).toHaveAttribute('aria-current', 'page');
   });
 
@@ -49,7 +52,10 @@ describe('Página da notícia (SPEC-007 FR-03)', () => {
     const secao = screen.getByRole('region', { name: 'Outras notícias' });
     expect(within(secao).getByRole('link', { name: outra.titulo })).toHaveAttribute('href', '/noticias/outra/');
     expect(within(secao).queryByRole('link', { name: tcc.titulo })).toBeNull();
-    expect(screen.getByRole('link', { name: /Voltar para as notícias/ })).toHaveAttribute('href', '/#noticias');
+    expect(screen.getByRole('link', { name: /Voltar para as notícias/ })).toHaveAttribute(
+      'href',
+      expect.stringMatching(/^\/noticias\/?$/),
+    );
   });
 
   it('sem outras notícias, não mostra a seção "Outras notícias"', () => {

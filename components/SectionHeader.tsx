@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react';
 import styles from './SectionHeader.module.css';
 
-type Props = { id: string; eyebrow: string; title: string; aside?: ReactNode };
+type Props = { id: string; eyebrow: string; title: string; aside?: ReactNode; as?: 'h1' | 'h2' };
 
-export function SectionHeader({ id, eyebrow, title, aside }: Props) {
+export function SectionHeader({ id, eyebrow, title, aside, as: Titulo = 'h2' }: Props) {
   return (
     <div className={styles.header}>
       <div className={styles.titles}>
         <p className="eyebrow">{eyebrow}</p>
-        <h2 id={id} className="h2">
+        <Titulo id={id} className="h2">
           {title}
-        </h2>
+        </Titulo>
       </div>
       {aside && <div className={styles.aside}>{aside}</div>}
     </div>

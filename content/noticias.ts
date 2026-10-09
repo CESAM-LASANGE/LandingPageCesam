@@ -52,11 +52,11 @@ const titulo = (texto: string): BlocoNoticia => ({ tipo: 'titulo', texto });
  * PENDENTE-VALIDACAO (textos escritos pelo agente a partir do material enviado; a coordenação deve revisar):
  * - TCC: data da defesa (01/10/2026, informada pela coordenação);
  * - composição da banca (conforme a folha de aprovação do TCC: Profa. Jéssica Ferreira da Silva e Prof. Nelison Ferreira Correa);
- * - nomes das pessoas que aparecem nas fotos (não identificadas no texto);
- * - Curso de geoprocessamento (08/06/2026, informado pela coordenação): "PMA" lido como Polícia Militar Ambiental;
+ * - nomes das pessoas que aparecem nas fotos (a coordenação decidiu não identificá-las por enquanto);
+ * - Curso de geoprocessamento (08/06/2026, informado pela coordenação): PMA = Polícia Militar Ambiental (confirmado);
  *   faltam carga horária, número de participantes e conteúdo programático (o texto não os cita);
  * - Curso de sonômetro (05/08/2026, informado pela coordenação): local lido como a sala do CESAM (as fotos mostram o
- *   banner do centro), "2º Batalhão" lido como da Polícia Militar Ambiental; o texto não cita conteúdo nem carga horária.
+ *   banner do centro); PMA = Polícia Militar Ambiental (confirmado); o texto não cita conteúdo nem carga horária.
  */
 export const noticias: Noticia[] = [
   {

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { hojeNoBuild, publicadas, type Noticia } from '@/content/noticias';
 import { news } from '@/content/site';
 import { Carousel } from './Carousel';
@@ -20,7 +21,18 @@ export function News({ lista = publicadas(hojeNoBuild()) }: Props) {
   return (
     <section id="noticias" className="section" aria-labelledby="noticias-title">
       <div className="container stack">
-        <SectionHeader id="noticias-title" eyebrow={news.eyebrow} title={news.title} />
+        <SectionHeader
+          id="noticias-title"
+          eyebrow={news.eyebrow}
+          title={news.title}
+          aside={
+            lista.length > 0 && (
+              <Link href="/noticias/" className="more">
+                Ver todas as notícias <span className="go">→</span>
+              </Link>
+            )
+          }
+        />
         {itens.length === 0 ? (
           <p className={styles.vazio}>Nenhuma notícia publicada ainda.</p>
         ) : (

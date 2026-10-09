@@ -137,3 +137,37 @@ describe('Formulário de contato', () => {
 
   // Envio, mailto e estado sem e-mail: testados em components/Contact.test.tsx (cesam@uems.br definido desde 2026-10-08).
 });
+
+describe('Cabeçalho, tarja e rodapé (pedidos da coordenação, 2026-10-09)', () => {
+  it('mostra o logo da UEMS ao lado do CESAM, como link para o portal da UEMS', () => {
+    const { container } = renderPage();
+    const link = container.querySelector('header a[href="https://www.uems.br"]');
+    expect(link).not.toBeNull();
+    expect(link).toHaveAttribute('aria-label', expect.stringContaining('Universidade Estadual de Mato Grosso do Sul'));
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(link?.querySelector('img')).toHaveAttribute('src', '/images/uems-logo.webp');
+  });
+
+  it('a tarja preta não traz mais o texto "Acessibilidade" sem destino', () => {
+    renderPage();
+    expect(screen.queryByText('Acessibilidade')).toBeNull();
+  });
+
+  it('todos os links do rodapé têm destino (nenhum item pendente)', () => {
+    const { container } = renderPage();
+    const rodape = container.querySelector('footer')!;
+    expect(rodape.querySelectorAll('[data-pending-link]')).toHaveLength(0);
+    const destinos = Object.fromEntries(
+      [...rodape.querySelectorAll('a[href^="https://"]')].map((a) => [
+        a.textContent?.replace(/\s*\(abre em nova aba\)/, ''),
+        a.getAttribute('href'),
+      ]),
+    );
+    expect(destinos).toMatchObject({
+      'Pró-Reitoria de Pesquisa': 'https://www.uems.br/pro-reitoria/proppi',
+      'Programas de pós-graduação': 'https://www.uems.br/cursos/pos-graduacao',
+      Instagram: 'https://www.instagram.com/cesam_uems/',
+      YouTube: 'https://www.youtube.com/@CESAM_UEMS',
+    });
+  });
+});

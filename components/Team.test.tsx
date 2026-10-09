@@ -62,7 +62,7 @@ describe('Equipe · coordenação (SPEC-005)', () => {
         'Bruna Alves de Souza Oliveira',
         'Elias de Oliveira Junior',
         'Lucas Beraldi de Souza Oliveira',
-        'Valquíria',
+        'Valquíria Nascimento',
       ]);
       expect(screen.queryByText('[Nome]')).toBeNull();
     });
@@ -97,7 +97,7 @@ describe('Equipe · coordenação (SPEC-005)', () => {
       render(<Team />);
       const valquiria = integrantes().at(-1)!;
       expect(within(valquiria).queryByRole('link')).toBeNull();
-      expect(within(valquiria).getByRole('img', { name: 'Foto de Valquíria' })).toBeInTheDocument();
+      expect(within(valquiria).getByRole('img', { name: 'Foto de Valquíria Nascimento' })).toBeInTheDocument();
     });
   });
 });

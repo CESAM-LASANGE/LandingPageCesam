@@ -11,13 +11,44 @@
   justify-content: space-between;
   gap: 24px;
 }
-.brand {
+.brands {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.brand,
+.uems {
   display: flex;
   align-items: center;
 }
 .logo {
-  height: 44px;
+  height: 34px;
   width: auto;
+}
+/* Logo da UEMS ao lado do CESAM, separada por um fio. */
+.uems {
+  min-height: 44px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border-strong);
+}
+.uemsLogo {
+  height: 20px;
+  width: auto;
+}
+@media (min-width: 420px) {
+  .brands {
+    gap: 14px;
+  }
+  .logo {
+    height: 44px;
+  }
+  .uems {
+    padding-left: 14px;
+  }
+  .uemsLogo {
+    height: 26px;
+  }
 }
 .toggle {
   width: 44px;
@@ -75,6 +106,15 @@
   }
   .logo {
     height: 58px;
+  }
+  .brands {
+    gap: 20px;
+  }
+  .uems {
+    padding-left: 20px;
+  }
+  .uemsLogo {
+    height: 34px;
   }
   .toggle {
     display: none;

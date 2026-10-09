@@ -26,17 +26,29 @@ export function SiteHeader({ base = '' }: { base?: string }) {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
-        <a href={base ? '/' : '#inicio'} className={styles.brand} aria-label={`${site.name}, página inicial`}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- export estático, imagem já otimizada */}
-          <img
-            src="/images/cesam-logo.webp"
-            alt=""
-            width={492}
-            height={159}
-            className={styles.logo}
-            fetchPriority="high"
-          />
-        </a>
+        <div className={styles.brands}>
+          <a href={base ? '/' : '#inicio'} className={styles.brand} aria-label={`${site.name}, página inicial`}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- export estático, imagem já otimizada */}
+            <img
+              src="/images/cesam-logo.webp"
+              alt=""
+              width={492}
+              height={159}
+              className={styles.logo}
+              fetchPriority="high"
+            />
+          </a>
+          <a
+            href="https://www.uems.br"
+            className={styles.uems}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Universidade Estadual de Mato Grosso do Sul, abre em nova aba"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- export estático */}
+            <img src="/images/uems-logo.webp" alt="" width={185} height={39} className={styles.uemsLogo} />
+          </a>
+        </div>
 
         <button
           ref={buttonRef}

@@ -71,11 +71,7 @@ export const site = {
 
 export const topBar = {
   text: 'Universidade Estadual de Mato Grosso do Sul · UEMS',
-  links: [
-    { label: 'Portal UEMS', href: 'https://www.uems.br', external: true },
-    // PENDENTE: página ou declaração de acessibilidade.
-    { label: 'Acessibilidade' },
-  ] satisfies Link[],
+  links: [{ label: 'Portal UEMS', href: 'https://www.uems.br', external: true }] satisfies Link[],
 };
 
 export const navigation: Link[] = [
@@ -240,7 +236,6 @@ export const team = {
   ] satisfies Coordinator[],
   // Cards pequenos. Nome e situação acadêmica conforme o Currículo Lattes (consultado em 2026-10-08).
   // Sem `lattes`, o card não é link (ex.: equipe administrativa). Novos integrantes entram conforme enviam fotos.
-  // PENDENTE-VALIDACAO: sobrenome da Valquíria.
   members: [
     {
       name: 'Jonailce Oliveira Diodato',
@@ -275,7 +270,7 @@ export const team = {
       lattes: 'https://lattes.cnpq.br/4817723878667471',
     },
     {
-      name: 'Valquíria',
+      name: 'Valquíria Nascimento',
       role: 'Administrativo',
       tone: 'yellow',
       photo: 'equipe/valquiria',
@@ -300,8 +295,10 @@ export const contact = {
   eyebrow: 'Contato',
   title: 'Fale com o CESAM',
   lead: 'Parcerias, análises, visitas técnicas ou interesse em fazer parte da equipe: escreva para nós.',
-  // PENDENTE: rua, número e CEP, se a coordenação quiser mostrá-los (o ponto do mapa é a UEMS em Dourados).
-  address: 'Universidade Estadual de Mato Grosso do Sul (UEMS), Unidade Universitária de Dourados · Dourados – MS',
+  // Endereço da Unidade Universitária de Dourados, conforme o site da UEMS (CEP e Caixa Postal);
+  // a rodovia é a Dourados–Itahum, informada pela coordenação.
+  address:
+    'UEMS, Unidade Universitária de Dourados · Rodovia Dourados–Itahum, Cidade Universitária · CEP 79804-970 · Dourados – MS',
   email: 'cesam@uems.br',
   phone: '(67) 3902-2547',
   phoneHref: 'tel:+556739022547',
@@ -331,15 +328,16 @@ export const footer = {
       title: 'Institucional',
       links: [
         { label: 'UEMS', href: 'https://www.uems.br', external: true },
-        // PENDENTE: endereços oficiais.
-        { label: 'Pró-Reitoria de Pesquisa' },
-        { label: 'Programas de pós-graduação' },
+        { label: 'Pró-Reitoria de Pesquisa', href: 'https://www.uems.br/pro-reitoria/proppi', external: true },
+        { label: 'Programas de pós-graduação', href: 'https://www.uems.br/cursos/pos-graduacao', external: true },
       ],
     },
     {
       title: 'Redes',
-      // PENDENTE: perfis oficiais.
-      links: [{ label: 'Instagram' }, { label: 'YouTube' }, { label: 'Diretório de Grupos CNPq' }],
+      links: [
+        { label: 'Instagram', href: 'https://www.instagram.com/cesam_uems/', external: true },
+        { label: 'YouTube', href: 'https://www.youtube.com/@CESAM_UEMS', external: true },
+      ],
     },
   ] satisfies { title: string; links: Link[] }[],
   copyright: `© ${site.year} CESAM · ${site.institution}`,
