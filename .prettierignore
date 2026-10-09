@@ -1,0 +1,11 @@
+.next
+out
+node_modules
+playwright-report
+test-results
+tests/e2e/**/*-snapshots
+package-lock.json
+public
+tests/e2e/**/*-snapshots
+index-mock.html
+content/midia

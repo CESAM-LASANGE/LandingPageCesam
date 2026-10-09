@@ -1,0 +1,64 @@
+.mapa {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.quadro {
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--blue-soft);
+  border: 1.5px dashed var(--blue-line);
+}
+.quadro[data-carregado] {
+  border-style: solid;
+  border-color: var(--border);
+  background: var(--bg-alt);
+}
+.antes {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+}
+.pino {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--green);
+}
+.nome {
+  font-weight: 700;
+  color: var(--ink);
+}
+.carregar {
+  min-height: 44px;
+  padding: 0 24px;
+  font-size: 0.9375rem;
+}
+.aviso {
+  max-width: 28ch;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+.iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.abrir {
+  align-self: flex-start;
+}

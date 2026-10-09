@@ -1,0 +1,207 @@
+.hero {
+  padding-block: 32px 40px;
+}
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h1);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--text);
+  max-width: 540px;
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.art {
+  position: relative;
+  order: -1;
+  width: 100%;
+  max-width: 536px;
+  margin-inline: auto;
+}
+.svg {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  margin-inline: auto;
+}
+.card {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .hero {
+    padding-block: 64px 72px;
+  }
+  .inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 64px;
+  }
+  .copy {
+    flex: 1 1 600px;
+    max-width: 600px;
+    gap: 28px;
+  }
+  .art {
+    order: 0;
+    flex: 0 1 536px;
+    margin: 0;
+  }
+  .svg {
+    max-height: none;
+  }
+  .card {
+    position: absolute;
+    left: -8px;
+    bottom: 8px;
+    width: 260px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    animation:
+      cardRise 0.9s 0.8s var(--ease-out) both,
+      floatB 6s 1.7s ease-in-out infinite;
+  }
+}
+
+.cardEyebrow {
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cardTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+.cardPlace {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* Animações da ilustração (keyframes locais ao módulo) */
+@keyframes cardRise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes floatA {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+@keyframes floatB {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 720;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.18) rotate(20deg);
+  }
+}
+@keyframes ripple {
+  from {
+    transform: scale(0.72);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.22);
+    opacity: 0;
+  }
+}
+.floatA,
+.floatB,
+.twinkle,
+.ripple {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.floatA {
+  animation: floatA 7s ease-in-out infinite;
+}
+.floatB {
+  animation: floatB 6s ease-in-out -2s infinite;
+}
+.draw,
+.draw2 {
+  stroke-dasharray: 720;
+  animation: draw 1.8s 0.35s cubic-bezier(0.6, 0.1, 0.2, 1) both;
+}
+.draw2 {
+  animation-delay: 0.55s;
+}
+.twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+.ripple {
+  animation: ripple 4.5s ease-out infinite;
+}
+.r2 {
+  animation-delay: 2.25s;
+}

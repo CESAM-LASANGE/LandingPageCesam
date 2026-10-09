@@ -1,0 +1,37 @@
+.bar {
+  display: none;
+  background: var(--ink);
+  color: var(--on-dark-soft);
+  font-size: 0.8125rem;
+  --focus: var(--yellow);
+}
+.inner {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.links {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.link,
+.link:hover {
+  color: var(--on-dark-soft);
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.links :global(.pending-link) {
+  color: var(--on-dark);
+}
+@media (min-width: 768px) {
+  .bar {
+    display: block;
+  }
+}

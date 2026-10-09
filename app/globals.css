@@ -1,0 +1,364 @@
+/* Tokens extraídos do design aprovado. Referência: docs/design/DESIGN_SYSTEM.md */
+:root {
+  /* Marca */
+  --green: #177a35;
+  --green-dark: #146b30;
+  --green-soft: #e6f3ea;
+  --green-bright: #3fb265;
+  --blue: #6fa3ef;
+  --blue-link: #1f5aa6;
+  --blue-link-hover: #15427d;
+  --blue-soft: #eef4fd;
+  --blue-line: #9dbdeb;
+  --blue-on-dark: #9ec2f5;
+  --yellow: #f2d52b;
+  --yellow-line: #b89a00;
+  --yellow-soft: #fbf6d9;
+
+  /* Neutros */
+  --ink: #0f1411;
+  --text: #3e4a44;
+  --muted: #5c6a63;
+  --bg: #ffffff;
+  --bg-alt: #f4f7f5;
+  --border: #e3e9e5;
+  --border-strong: #cbd5cf;
+  --on-dark: #c3ccc7;
+  --on-dark-soft: #d6ddd9;
+  --ink-raised: #26302b;
+  --ink-line: #2b3530;
+
+  /* Observatório (identidade própria da plataforma) */
+  --obs-bg: #0c2d57;
+  --obs-bg-deep: #082d59;
+  --obs-accent: #7dd3fc;
+  --obs-text: #e7f0f8;
+  --obs-muted: #b8cbe0;
+  --obs-cta: #18765a;
+
+  /* Tipografia */
+  --font-label: var(--font-michroma), sans-serif;
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-body: var(--font-source-sans), system-ui, sans-serif;
+  --font-obs-display: var(--font-fraunces), Georgia, serif;
+  --font-obs-body: var(--font-public-sans), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --fs-h1: clamp(2.125rem, 1.1rem + 3vw, 3.75rem);
+  --fs-h2: clamp(1.875rem, 1.25rem + 1.7vw, 2.75rem);
+  --fs-lead: clamp(1.0625rem, 0.95rem + 0.35vw, 1.25rem);
+  --fs-body-lg: clamp(1.0625rem, 1rem + 0.15vw, 1.125rem);
+  --fs-label: clamp(0.625rem, 0.58rem + 0.15vw, 0.75rem);
+
+  /* Espaço e forma */
+  --gutter: clamp(1rem, -0.3rem + 5.6vw, 7.5rem);
+  --container: 75rem;
+  --section-y: clamp(2.5rem, 1.25rem + 3.6vw, 4.5rem);
+  --section-gap: clamp(1.25rem, 0.6rem + 2.8vw, 3.5rem);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-pill: 999px;
+  --shadow-card: 0 12px 32px rgba(15, 20, 17, 0.08);
+  --shadow-lift: 0 22px 48px rgba(15, 20, 17, 0.12);
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --focus: var(--blue-link);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--blue-link);
+}
+a:hover {
+  color: var(--blue-link-hover);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+[id] {
+  scroll-margin-top: 1rem;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 1rem;
+  color: #fff;
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+.section--alt {
+  background: var(--bg-alt);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+/* Tipografia compartilhada */
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  font-size: var(--fs-body-lg);
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* Botões e links */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 28px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    background-color 0.25s,
+    color 0.25s;
+}
+.btn svg {
+  transition: transform 0.3s var(--ease-out);
+}
+.btn--primary {
+  background: var(--green);
+  color: #fff;
+}
+.btn--primary:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(23, 122, 53, 0.3);
+}
+.btn--primary:hover svg {
+  transform: translateX(5px);
+}
+.btn--ghost {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: transparent;
+}
+.btn--ghost:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.go {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-out);
+}
+.more:hover .go,
+.lift:hover .go {
+  transform: translateX(5px);
+}
+
+/* Link cujo destino ainda não foi definido: mantém o layout sem publicar link quebrado. */
+.pending-link {
+  color: var(--muted);
+  cursor: default;
+  text-decoration: underline dotted;
+  text-underline-offset: 4px;
+}
+
+/* Cartões */
+.lift {
+  transition:
+    transform 0.4s var(--ease-out),
+    box-shadow 0.4s,
+    border-color 0.4s;
+}
+@media (hover: hover) {
+  .lift:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* Placeholder de imagem pendente */
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+  text-align: center;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.placeholder--dashed {
+  border-radius: var(--radius-xl);
+  background: var(--blue-soft);
+  border: 1.5px dashed var(--blue-line);
+  color: var(--blue-link);
+}
+
+.tone-green {
+  background: var(--green-soft);
+}
+.tone-blue {
+  background: var(--blue-soft);
+}
+.tone-yellow {
+  background: var(--yellow-soft);
+}
+
+/* Animações */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.9s var(--ease-out) both;
+}
+.d1 {
+  animation-delay: 0.05s;
+}
+.d2 {
+  animation-delay: 0.15s;
+}
+.d3 {
+  animation-delay: 0.27s;
+}
+.d4 {
+  animation-delay: 0.39s;
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

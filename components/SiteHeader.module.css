@@ -1,0 +1,127 @@
+.header {
+  position: relative;
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  height: 44px;
+  width: auto;
+}
+.toggle {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* Menu mobile: painel abaixo do header */
+.nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+.nav[data-open='true'] {
+  display: block;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 8px var(--gutter) 20px;
+  list-style: none;
+}
+.navlink {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+.cta {
+  margin-top: 16px;
+  width: 100%;
+}
+
+@media (min-width: 1100px) {
+  .inner {
+    min-height: 88px;
+  }
+  .logo {
+    height: 58px;
+  }
+  .toggle {
+    display: none;
+  }
+  .nav,
+  .nav[data-open='true'] {
+    display: block;
+    position: static;
+    border: 0;
+    box-shadow: none;
+  }
+  .list {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+    padding: 0;
+  }
+  .navlink {
+    position: relative;
+    min-height: 44px;
+    font-size: 1rem;
+    border: 0;
+  }
+  .navlink::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease-out);
+  }
+  .navlink:hover::after {
+    transform: scaleX(1);
+  }
+  .navlink:hover {
+    color: var(--ink);
+  }
+  .cta {
+    margin: 0;
+    width: auto;
+    min-height: 44px;
+    padding: 0 22px;
+    font-size: 1rem;
+  }
+}

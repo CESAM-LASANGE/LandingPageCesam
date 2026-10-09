@@ -1,0 +1,105 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 100%;
+  border-radius: var(--radius-xl);
+}
+.imagem {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.imagem img {
+  transition: transform 0.7s var(--ease-out);
+}
+.card:hover .imagem img {
+  transform: scale(1.04);
+}
+.corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.categoria {
+  font-weight: 700;
+  color: var(--green);
+}
+.titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+/* O link cobre o card inteiro; o foco aparece em volta do card. */
+.link,
+.link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+}
+.link:focus-visible {
+  outline: none;
+}
+.link:focus-visible::after {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+.resumo {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+.ler {
+  display: inline-flex;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--blue-link);
+}
+.card:hover .ler .go {
+  transform: translateX(5px);
+}
+
+/* Destaque: única notícia, imagem à esquerda e texto à direita no desktop. */
+@media (min-width: 900px) {
+  .destaque {
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+    padding: 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+  }
+  .destaque .imagem {
+    flex: 0 0 48%;
+    border-radius: var(--radius-xl);
+  }
+  .destaque .corpo {
+    gap: 16px;
+    padding-right: 16px;
+  }
+  .destaque .titulo {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .destaque .resumo {
+    font-size: 1.0625rem;
+  }
+  .destaque .link::after {
+    border-radius: var(--radius-2xl);
+  }
+}

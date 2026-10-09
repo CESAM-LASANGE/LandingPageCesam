@@ -1,0 +1,23 @@
+{
+  "equipe/bruna-alves-de-souza-oliveira": { "largura": 1440, "altura": 1920, "larguras": [480,960,1440], "cor": "#6E564D" },
+  "equipe/elias-de-oliveira-junior": { "largura": 1024, "altura": 1600, "larguras": [480,960,1024], "cor": "#BEB1A3" },
+  "equipe/jonailce-oliveira-diodato": { "largura": 1080, "altura": 1080, "larguras": [480,960,1080], "cor": "#705E55" },
+  "equipe/lucas-beraldi-de-souza-oliveira": { "largura": 1080, "altura": 1080, "larguras": [480,960,1080], "cor": "#5E5B58" },
+  "equipe/nelison-ferreira-correa": { "largura": 626, "altura": 640, "larguras": [480,626], "cor": "#9F805D" },
+  "equipe/valquiria": { "largura": 1080, "altura": 1080, "larguras": [480,960,1080], "cor": "#908981" },
+  "equipe/vinicius-de-oliveira-ribeiro": { "largura": 1080, "altura": 1080, "larguras": [480,960,1080], "cor": "#616253" },
+  "noticias/curso-geoprocessamento-pma-aula-com-equipamentos": { "largura": 1600, "altura": 900, "larguras": [480,960,1600], "cor": "#676664" },
+  "noticias/curso-geoprocessamento-pma-bancadas": { "largura": 900, "altura": 1600, "larguras": [480,900], "cor": "#71716D" },
+  "noticias/curso-geoprocessamento-pma-fundo-da-sala": { "largura": 900, "altura": 1600, "larguras": [480,900], "cor": "#696864" },
+  "noticias/curso-geoprocessamento-pma-quadro-e-notebooks": { "largura": 900, "altura": 1600, "larguras": [480,900], "cor": "#6A6863" },
+  "noticias/curso-geoprocessamento-pma-sala-com-participantes": { "largura": 1600, "altura": 900, "larguras": [480,960,1600], "cor": "#7B7872" },
+  "noticias/curso-sonometro-pma-grupo-ao-fundo": { "largura": 720, "altura": 1280, "larguras": [480,720], "cor": "#7E8081" },
+  "noticias/curso-sonometro-pma-participantes-com-pastas": { "largura": 720, "altura": 1280, "larguras": [480,720], "cor": "#757678" },
+  "noticias/curso-sonometro-pma-sala": { "largura": 720, "altura": 1280, "larguras": [480,720], "cor": "#777876" },
+  "noticias/tcc-ana-laura-ao-lado-do-telao": { "largura": 1200, "altura": 1600, "larguras": [480,960,1200], "cor": "#868689" },
+  "noticias/tcc-ana-laura-apresentando-resultados": { "largura": 1600, "altura": 1200, "larguras": [480,960,1600], "cor": "#78746C" },
+  "noticias/tcc-ana-laura-com-participantes": { "largura": 1600, "altura": 1200, "larguras": [480,960,1600], "cor": "#8C8B90" },
+  "sobre/equipe-e-policia-militar-na-sala": { "largura": 1280, "altura": 720, "larguras": [480,960,1280], "cor": "#676A72" },
+  "sobre/sala-do-cesam": { "largura": 1600, "altura": 1200, "larguras": [480,960,1600], "cor": "#70777B" },
+  "sobre/visita-de-campo": { "largura": 847, "altura": 847, "larguras": [480,847], "cor": "#8B8285" }
+}

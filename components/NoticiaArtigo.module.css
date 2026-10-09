@@ -1,0 +1,148 @@
+.artigo {
+  padding-top: 24px;
+}
+.container {
+  max-width: calc(68rem + 2 * var(--gutter));
+}
+.trilha {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.trilha a {
+  color: var(--muted);
+}
+.trilha a:hover {
+  color: var(--ink);
+}
+.atual {
+  color: var(--ink);
+}
+.cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 46rem;
+  margin-top: 32px;
+}
+.meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+.categoria {
+  font-weight: 700;
+  color: var(--green);
+}
+.titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.875rem, 1.3rem + 2vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.resumo {
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+  color: var(--text);
+}
+.capa {
+  margin-top: 32px;
+}
+.figura {
+  margin: 0;
+  min-width: 0;
+}
+.foto {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+.capa .foto {
+  aspect-ratio: 16 / 10 !important;
+  max-height: 560px;
+}
+.legenda {
+  margin-top: 10px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.texto {
+  max-width: 46rem;
+  margin-top: 40px;
+  font-size: var(--fs-body-lg);
+  line-height: 1.7;
+  color: var(--text);
+}
+.texto p + p {
+  margin-top: 1.1em;
+}
+.subtitulo {
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+/* Fotos lado a lado com a mesma altura: cada uma cresce em proporção ao seu formato. */
+.galeria {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 48px;
+}
+@media (min-width: 900px) {
+  .galeria {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .galeria .figura {
+    flex-shrink: 1;
+    flex-basis: 0;
+  }
+}
+.grade {
+  display: grid;
+  gap: 24px;
+  margin-top: 48px;
+}
+@media (min-width: 700px) {
+  .grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* Com 3 fotos, uma linha de 3 no desktop (evita a terceira sozinha embaixo). */
+@media (min-width: 1000px) {
+  .grade[data-quantidade='3'] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.voltar {
+  margin-top: 40px;
+}
+.outras {
+  margin-top: 72px;
+  padding-block: 56px 72px;
+  background: var(--bg-alt);
+}
+.outrasTitulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.75rem;
+  letter-spacing: -0.01em;
+}
+.outrasLista {
+  display: grid;
+  gap: 24px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 900px) {
+  .outrasLista {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

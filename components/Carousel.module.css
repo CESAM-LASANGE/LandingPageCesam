@@ -1,0 +1,119 @@
+.carrossel {
+  position: relative;
+  --focus: var(--blue-link);
+}
+.trilho {
+  position: relative;
+  touch-action: pan-y;
+}
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+.botao:hover {
+  border-color: var(--ink);
+}
+.indicadores {
+  display: flex;
+  align-items: center;
+}
+/* Alvo de 24 px com marcador visual de 8 px (WCAG 2.5.8). */
+.indicador {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.indicador::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--border-strong);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.3s var(--ease-out),
+    background-color 0.3s;
+}
+.indicador[aria-current='true']::after {
+  width: 20px;
+  background: var(--ink);
+}
+
+/* Variante fotos: slides empilhados com troca suave (VR-02, VR-03). */
+.fotos {
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  background: var(--blue-soft);
+}
+.fotos .trilho {
+  height: 100%;
+}
+.fotos .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out);
+}
+.fotos .slide[data-ativo] {
+  opacity: 1;
+}
+.fotos .controles {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-card);
+}
+.fotos .botao {
+  border-color: transparent;
+}
+.fotos .botao:hover {
+  border-color: var(--border-strong);
+}
+
+/* Variante cards: trilho deslizante, um card por vez (SPEC-007). */
+/* A margem negativa compensa o espaçamento interno dos slides (12 px), alinhando o primeiro card ao título da seção. */
+.cards {
+  overflow: hidden;
+  margin-inline: -12px;
+}
+.cards .trilho {
+  display: flex;
+  transition: transform 0.6s var(--ease-out);
+}
+.cards .slide {
+  flex-shrink: 0;
+  padding-inline: 12px;
+}
+.cards .controles {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
