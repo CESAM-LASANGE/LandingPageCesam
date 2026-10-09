@@ -179,3 +179,12 @@ describe('Hero (pedido da coordenação, 2026-10-09)', () => {
     expect(screen.queryByText('[Unidade / Campus] · MS')).toBeNull();
   });
 });
+
+describe('Hero · eyebrow (pedido da coordenação, 2026-10-09)', () => {
+  it('o texto "Centro de Estudos · UEMS" aparece sem a estrela giratória antes', () => {
+    const { container } = renderPage();
+    const eyebrow = screen.getByText('Centro de Estudos · UEMS');
+    expect(eyebrow.querySelector('svg')).toBeNull();
+    expect(container.querySelector('#inicio p.eyebrow svg')).toBeNull();
+  });
+});

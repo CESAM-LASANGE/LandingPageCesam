@@ -11,11 +11,6 @@
   flex-direction: column;
   gap: 20px;
 }
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 .title {
   font-family: var(--font-display);
   font-weight: 600;

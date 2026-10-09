@@ -2,19 +2,12 @@ import { hero } from '@/content/site';
 import { Icon } from './Icon';
 import styles from './Hero.module.css';
 
-const star = '12,2 14.9,8.9 22.4,9.3 16.6,14.1 18.5,21.4 12,17.3 5.5,21.4 7.4,14.1 1.6,9.3 9.1,8.9';
-
 export function Hero() {
   return (
     <section id="inicio" className={styles.hero} aria-labelledby="hero-title">
       <div className={`container ${styles.inner}`}>
         <div className={styles.copy}>
-          <p className={`eyebrow rise d1 ${styles.eyebrow}`}>
-            <svg className={styles.twinkle} width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-              <polygon points={star} fill="#F2D52B" stroke="#B89A00" strokeWidth="1" />
-            </svg>
-            {hero.eyebrow}
-          </p>
+          <p className="eyebrow rise d1">{hero.eyebrow}</p>
           <h1 id="hero-title" className={`rise d2 ${styles.title}`}>
             {hero.title}
           </h1>
