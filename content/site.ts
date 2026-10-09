@@ -63,7 +63,7 @@ export const site = {
   institutionShort: 'UEMS',
   // Domínio do site (canonical, Open Graph, sitemap). Provisório até o domínio definitivo:
   // troque na Vercel com NEXT_PUBLIC_SITE_URL ou aqui, sem barra final.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://landing-page-cesam.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cesamuems.vercel.app',
   description:
     'O Centro de Estudos em Saneamento Ambiental da UEMS reúne pesquisa, extensão e formação de pessoas para enfrentar os desafios de água, esgoto, resíduos e drenagem em Mato Grosso do Sul.',
   year: 2026,

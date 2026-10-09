@@ -91,4 +91,4 @@ Fonte: `content/site.ts` (buscar `PENDENTE` e `[`).
 - Foto da equipe e unidade/campus do laboratório.
 - URLs: Portal de Resíduos Sólidos, Acessibilidade, Pró-Reitoria de Pesquisa, Pós-graduação, Instagram, YouTube, Diretório CNPq, páginas "ver todos".
 - Validação dos textos do design (hero, sobre, missão/visão/valores, linhas de pesquisa).
-- Domínio definitivo (`site.url`, hoje o endereço provisório `landing-page-cesam.vercel.app`; troque por `NEXT_PUBLIC_SITE_URL` na Vercel).
+- Domínio definitivo (`site.url`, hoje o endereço provisório `cesamuems.vercel.app`; troque por `NEXT_PUBLIC_SITE_URL` na Vercel).
