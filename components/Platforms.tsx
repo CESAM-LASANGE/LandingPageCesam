@@ -124,8 +124,14 @@ export function Platforms() {
           </a>
 
           {residuos.href ? (
-            <a href={residuos.href} className={`lift reveal ${styles.card} ${styles.res}`}>
+            <a
+              href={residuos.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`lift reveal ${styles.card} ${styles.res}`}
+            >
               {residuosBody}
+              <span className="visually-hidden"> (abre em nova aba)</span>
             </a>
           ) : (
             <article className={`reveal ${styles.card} ${styles.res}`}>{residuosBody}</article>

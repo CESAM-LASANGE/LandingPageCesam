@@ -129,11 +129,12 @@ export const platforms = {
       { value: '80% → 5%', label: 'com disposição inadequada, em oito anos' },
     ],
     themes: ['Disposição legal', 'Cooperativas', 'Logística reversa', 'Publicações'],
+    // Usado só quando o portal não tem `href`.
     status: 'Estamos finalizando o portal. Em breve ele estará disponível aqui.',
     credit: 'Projeto Disposição Legal · MPMS + UEMS',
     cta: 'Acessar o portal',
-    // Quando o portal for ao ar, informe o endereço aqui: o card passa a ser um link e o aviso "Em breve" some.
-    href: undefined as string | undefined,
+    // Portal no ar desde 2026-10-20. Sem `href` (ex.: fora do ar), o card volta a mostrar o aviso "Em breve" e deixa de ser link.
+    href: 'https://portalderesiduos.vercel.app/' as string | undefined,
   },
 };
 
