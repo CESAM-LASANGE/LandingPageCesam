@@ -26,34 +26,13 @@ test('o cabeçalho mostra o logo da UEMS ao lado do CESAM, sem estourar a largur
   }
 });
 
-// Pedido da coordenação (2026-10-27): o emblema desmonta/monta ao cruzar um ponto da rolagem, sem acompanhar cada pixel.
-test.describe('emblema do início da página', () => {
-  test.use({ reducedMotion: 'no-preference' });
-  test('desmonta ao descer até o ponto de corte e monta ao subir', async ({ page }) => {
-    await page.goto('/');
-    const p = () =>
-      page.evaluate(() =>
-        Number((document.querySelector('.ce-emblem svg') as SVGElement).style.getPropertyValue('--p') || 0),
-      );
-    const topo = await page.evaluate(
-      () => document.querySelector('.ce-emblem')!.getBoundingClientRect().top + window.scrollY,
-    );
-    const ponto = Math.max(topo, 120);
-
-    await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), Math.max(ponto - 60, 1));
-    await page.waitForTimeout(1500);
-    expect(await p()).toBe(0); // antes do ponto: continua montado, mesmo rolando um pouco
-
-    await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), ponto + 5);
-    await page.waitForTimeout(1800);
-    expect(await p()).toBe(1); // cruzou o ponto: desmontou por inteiro
-
-    await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), ponto + 300);
-    await page.waitForTimeout(300);
-    expect(await p()).toBe(1); // rolar mais não muda nada
-
-    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-    await page.waitForTimeout(1800);
-    expect(await p()).toBe(0); // voltou ao topo: montou de novo
-  });
+// Pedido da coordenação (2026-10-27): o emblema só reage ao mouse; a rolagem não o desmonta.
+test('o emblema continua montado ao rolar a página', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => window.scrollTo({ top: 600, behavior: 'instant' }));
+  await page.waitForTimeout(500);
+  const p = await page.evaluate(() =>
+    (document.querySelector('.ce-emblem svg') as SVGElement).style.getPropertyValue('--p'),
+  );
+  expect(p).toBe('');
 });

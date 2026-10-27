@@ -23,19 +23,9 @@
 .ce-emblem * {
   transform-box: view-box;
 }
-.ce-emblem svg {
-  translate: 0 calc(var(--p, 0) * 18%);
-}
-/* desmontar com a rolagem: --p vai de 0 (montado) a 1 (desmontado); cada peça tem sua janela [--a, --b] e seu destino */
-.ce-px,
-.ce-sc {
-  --k: clamp(0, (var(--p, 0) - var(--a, 0))/ (var(--b, 1) - var(--a, 0)), 1);
-  --e: calc(var(--k) * var(--k) * (3 - 2 * var(--k)));
-  translate: calc(var(--mx, 0) * var(--d, 0) * 1px + var(--e) * var(--tx, 0) * 1px)
-    calc(var(--my, 0) * var(--d, 0) * 1px + var(--e) * var(--ty, 0) * 1px);
-  rotate: calc(var(--e) * var(--tr, 0) * 1deg);
-  scale: calc(1 - var(--e) * var(--ts, 0));
-  opacity: calc(1 - var(--e) * var(--e) * var(--fo, 1));
+.ce-px {
+  translate: calc(var(--mx, 0) * var(--d, 0) * 1px) calc(var(--my, 0) * var(--d, 0) * 1px);
+  transition: translate 0.12s linear;
 }
 
 /* --- entrada (uma vez) --- */
@@ -428,13 +418,8 @@
     animation: none !important;
     transition: none !important;
   }
-  .ce-emblem svg,
-  .ce-px,
-  .ce-sc {
+  .ce-px {
     translate: none;
-    rotate: none;
-    scale: none;
-    opacity: 1;
   }
   .ce-ripple,
   .ce-splash,
@@ -456,11 +441,6 @@
 .ce-emblem.ce-still .ce-sparks {
   display: none;
 }
-.ce-emblem.ce-still svg,
-.ce-emblem.ce-still .ce-px,
-.ce-emblem.ce-still .ce-sc {
+.ce-emblem.ce-still .ce-px {
   translate: none;
-  rotate: none;
-  scale: none;
-  opacity: 1;
 }

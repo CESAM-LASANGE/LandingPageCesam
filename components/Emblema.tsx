@@ -9,7 +9,7 @@ const peca = (vars: Record<string, string | number>, origem?: string) =>
 
 /**
  * Emblema animado do CESAM no início da página: entrada única, respiração contínua e profundidade com o mouse.
- * Respeita "reduzir movimento" (CSS), desmonta e monta em pontos da rolagem e pausa quando sai da tela.
+ * Respeita "reduzir movimento" (CSS) e pausa quando sai da tela.
  */
 export function Emblema() {
   const raiz = useRef<HTMLDivElement>(null);
@@ -44,42 +44,6 @@ export function Emblema() {
       ty = 0;
       if (!quadro) quadro = requestAnimationFrame(animar);
     };
-    // Rolagem: ao descer até o ponto em que o emblema começa a ser cortado, ele se desmonta sozinho (animação
-    // de ~1,1 s); ao subir de volta a um ponto um pouco acima, ele se monta de novo. Os dois pontos são
-    // diferentes (histerese) para não ficar alternando perto do limite.
-    const DURACAO = 1100;
-    let p = 0;
-    let desmontado = false;
-    let quadroRolagem = 0;
-    const suave = (u: number) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
-    const levarPara = (destino: number) => {
-      cancelAnimationFrame(quadroRolagem);
-      const origem = p;
-      const inicio = performance.now();
-      const passo = (agora: number) => {
-        const u = Math.min(1, (agora - inicio) / DURACAO);
-        p = origem + (destino - origem) * suave(u);
-        svg.style.setProperty('--p', p.toFixed(4));
-        quadroRolagem = u < 1 ? requestAnimationFrame(passo) : 0;
-      };
-      quadroRolagem = requestAnimationFrame(passo);
-    };
-    const aoRolar = () => {
-      if (parado.matches) return;
-      const topo = el.getBoundingClientRect().top + window.scrollY;
-      const descer = Math.max(topo, 120);
-      const subir = Math.max(descer - 140, 40);
-      if (!desmontado && window.scrollY >= descer) {
-        desmontado = true;
-        levarPara(1);
-      } else if (desmontado && window.scrollY <= subir) {
-        desmontado = false;
-        levarPara(0);
-      }
-    };
-    window.addEventListener('scroll', aoRolar, { passive: true });
-    window.addEventListener('resize', aoRolar);
-    aoRolar();
     window.addEventListener('pointermove', aoMover, { passive: true });
     document.addEventListener('pointerleave', aoSair);
     const observador = new IntersectionObserver((entradas) =>
@@ -89,11 +53,8 @@ export function Emblema() {
     return () => {
       window.removeEventListener('pointermove', aoMover);
       document.removeEventListener('pointerleave', aoSair);
-      window.removeEventListener('scroll', aoRolar);
-      window.removeEventListener('resize', aoRolar);
       observador.disconnect();
       cancelAnimationFrame(quadro);
-      cancelAnimationFrame(quadroRolagem);
     };
   }, []);
 
@@ -117,7 +78,7 @@ export function Emblema() {
           </radialGradient>
         </defs>
 
-        <g className="ce-px" style={peca({ '--d': 3, '--ts': '.3', '--fo': '.75' }, '285px 300px')}>
+        <g className="ce-px" style={peca({ '--d': 3 }, '285px 300px')}>
           <circle className="ce-disc" cx="285" cy="300" r="250" fill="url(#ce-disc-fill)" />
           <g className="ce-ripple" fill="none" stroke="var(--ce-blue)" strokeWidth="1.5">
             <circle cx="285" cy="300" r="250" />
@@ -130,10 +91,7 @@ export function Emblema() {
         </g>
 
         <g className="ce-float">
-          <g
-            className="ce-px"
-            style={peca({ '--d': 8, '--a': '.3', '--b': 1, '--tx': 150, '--ty': 170, '--tr': 70 }, '300px 300px')}
-          >
+          <g className="ce-px" style={peca({ '--d': 8 }, '300px 300px')}>
             <g className="ce-gear-in">
               <g className="ce-gear-idle">
                 <path
@@ -185,13 +143,7 @@ export function Emblema() {
             </g>
           </g>
 
-          <g
-            className="ce-px"
-            style={peca(
-              { '--d': 12, '--a': '.22', '--b': '.9', '--tx': -110, '--ty': 220, '--tr': -35 },
-              '170px 300px',
-            )}
-          >
+          <g className="ce-px" style={peca({ '--d': 12 }, '170px 300px')}>
             <g className="ce-leaf-in">
               <path
                 d="M214,57 C 175,70 140,100 115,135 C 88,175 74,215 76,260 C 78,320 120,370 175,388 C 230,405 300,405 358,374 L 300,370 L 153,332 L 205,290 L 212,200 C 206,160 204,110 214,57 Z"
@@ -205,10 +157,7 @@ export function Emblema() {
             </g>
           </g>
 
-          <g
-            className="ce-px"
-            style={peca({ '--d': 16, '--a': '.15', '--b': '.8', '--tx': 60, '--ty': -230, '--tr': 14 }, '285px 220px')}
-          >
+          <g className="ce-px" style={peca({ '--d': 16 }, '285px 220px')}>
             <g className="ce-drop-in">
               <g className="ce-drop-squash">
                 <path
@@ -229,10 +178,7 @@ export function Emblema() {
             </g>
           </g>
 
-          <g
-            className="ce-px"
-            style={peca({ '--d': 24, '--a': '.1', '--b': '.7', '--tx': 200, '--ty': -260, '--tr': 260 }, '341px 340px')}
-          >
+          <g className="ce-px" style={peca({ '--d': 24 }, '341px 340px')}>
             <g className="ce-star-in">
               <g className="ce-star-idle">
                 <polygon
@@ -262,28 +208,20 @@ export function Emblema() {
 
           <g
             className="ce-px"
-            style={peca({ '--d': 20, '--fo': 0 })}
+            style={peca({ '--d': 20 })}
             fill="var(--ce-paper)"
             stroke="var(--ce-ink)"
             strokeWidth="4.5"
             strokeLinejoin="round"
           >
-            <g
-              className="ce-r1 ce-sc"
-              style={peca({ '--b': '.55', '--tx': 140, '--ty': -280, '--tr': 14 }, '180px 140px')}
-              clipPath="url(#ce-clip-a)"
-            >
+            <g className="ce-r1" clipPath="url(#ce-clip-a)">
               <g className="ce-rib-in">
                 <g className="ce-rib-idle">
                   <path d="M54,103 C 66,135 92,153 140,156 C 200,155 250,143 302,132 C 250,146 200,164 140,169 C 92,170 64,140 54,103 Z" />
                 </g>
               </g>
             </g>
-            <g
-              className="ce-r2 ce-sc"
-              style={peca({ '--a': '.04', '--b': '.6', '--tx': 340, '--ty': -40, '--tr': 7 }, '240px 190px')}
-              clipPath="url(#ce-clip-b)"
-            >
+            <g className="ce-r2" clipPath="url(#ce-clip-b)">
               <g className="ce-rib-in">
                 <g className="ce-rib-idle">
                   <path d="M22,145 C 40,185 80,203 130,205 C 200,203 290,165 360,156 C 400,152 430,165 452,188 C 425,178 395,176 360,181 C 290,192 200,236 130,239 C 75,240 30,205 22,145 Z" />
@@ -296,11 +234,7 @@ export function Emblema() {
                 </g>
               </g>
             </g>
-            <g
-              className="ce-r3 ce-sc"
-              style={peca({ '--a': '.08', '--b': '.65', '--tx': 300, '--ty': 170, '--tr': 12 }, '260px 260px')}
-              clipPath="url(#ce-clip-c)"
-            >
+            <g className="ce-r3" clipPath="url(#ce-clip-c)">
               <g className="ce-rib-in">
                 <g className="ce-rib-idle">
                   <path d="M57,250 C 75,272 100,280 140,280 C 210,278 290,232 370,221 C 410,216 440,224 463,237 C 435,231 405,229 370,236 C 290,250 210,298 140,297 C 95,296 65,278 57,250 Z" />
