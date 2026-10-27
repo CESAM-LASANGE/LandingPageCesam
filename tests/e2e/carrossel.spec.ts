@@ -9,15 +9,16 @@ test.describe('com movimento liberado', () => {
   test.use({ reducedMotion: 'no-preference' });
 
   test('avança sozinho em ~6 s e pausa com o mouse em cima (AC-01, AC-02)', async ({ page, isMobile }) => {
+    // O autoplay começa quando a página carrega; a rolagem suave até o carrossel varia com a carga da máquina,
+    // então os 6 s são medidos a partir da navegação, e não da rolagem.
+    const inicio = Date.now();
     await page.goto('/');
     await carrossel(page).scrollIntoViewIfNeeded();
     await expect(slideAtivo(page)).toHaveAttribute('aria-label', '1 de 3');
     // A precisão de 6 s ± 0,5 s é coberta pelo teste unitário com relógio simulado (Carousel.test.tsx).
-    // Aqui, com o navegador sob carga dos testes paralelos, só confirmamos que não troca antes de 5 s
-    // e que troca sozinho até 9 s.
-    await page.waitForTimeout(5000);
-    await expect(slideAtivo(page)).toHaveAttribute('aria-label', '1 de 3');
-    await expect(slideAtivo(page)).toHaveAttribute('aria-label', '2 de 3', { timeout: 4000 });
+    // Aqui só confirmamos que não troca antes de ~5 s e que troca sozinho até ~10 s depois da carga.
+    await expect(slideAtivo(page)).toHaveAttribute('aria-label', '2 de 3', { timeout: 10000 });
+    expect(Date.now() - inicio).toBeGreaterThanOrEqual(4500);
 
     test.skip(isMobile === true, 'sem mouse no celular');
     await carrossel(page).hover();

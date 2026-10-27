@@ -23,9 +23,19 @@
 .ce-emblem * {
   transform-box: view-box;
 }
-.ce-px {
-  translate: calc(var(--mx, 0) * var(--d, 0) * 1px) calc(var(--my, 0) * var(--d, 0) * 1px);
-  transition: translate 0.12s linear;
+.ce-emblem svg {
+  translate: 0 calc(var(--p, 0) * 18%);
+}
+/* desmontar com a rolagem: --p vai de 0 (montado) a 1 (desmontado); cada peça tem sua janela [--a, --b] e seu destino */
+.ce-px,
+.ce-sc {
+  --k: clamp(0, (var(--p, 0) - var(--a, 0))/ (var(--b, 1) - var(--a, 0)), 1);
+  --e: calc(var(--k) * var(--k) * (3 - 2 * var(--k)));
+  translate: calc(var(--mx, 0) * var(--d, 0) * 1px + var(--e) * var(--tx, 0) * 1px)
+    calc(var(--my, 0) * var(--d, 0) * 1px + var(--e) * var(--ty, 0) * 1px);
+  rotate: calc(var(--e) * var(--tr, 0) * 1deg);
+  scale: calc(1 - var(--e) * var(--ts, 0));
+  opacity: calc(1 - var(--e) * var(--e) * var(--fo, 1));
 }
 
 /* --- entrada (uma vez) --- */
@@ -70,21 +80,21 @@
   transform-origin: 50% 100%;
 }
 .ce-emblem.is-intro .ce-drop-in {
-  animation: ce-drop-fall 0.7s cubic-bezier(0.55, 0, 1, 0.45) 0.55s both;
+  animation: ce-drop-fall 1.15s linear 0.55s both;
 }
 .ce-emblem.is-intro .ce-drop-squash {
-  animation: ce-squash 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) 1.25s both;
+  animation: ce-squash 1.2s linear 1s both;
   transform-origin: 285px 388px;
 }
 .ce-emblem.is-intro .ce-shine {
-  animation: ce-fade 0.5s ease 1.55s both;
+  animation: ce-fade 0.5s ease 1.75s both;
 }
 .ce-emblem.is-intro .ce-splash circle {
-  animation: ce-splash 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 1.25s both;
+  animation: ce-splash 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 1.07s both;
   transform-origin: 285px 300px;
 }
 .ce-emblem.is-intro .ce-splash circle + circle {
-  animation-delay: 1.45s;
+  animation-delay: 1.54s;
 }
 .ce-emblem.is-intro .ce-wipe {
   animation: ce-wipe 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
@@ -226,25 +236,57 @@
   }
 }
 @keyframes ce-drop-fall {
-  from {
+  0% {
     opacity: 0;
     transform: translateY(-170px);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
   }
-  25% {
+  12% {
     opacity: 1;
   }
-  to {
+  45% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  66% {
+    transform: translateY(-42px);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  86% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  93% {
+    transform: translateY(-8px);
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  100% {
     opacity: 1;
     transform: none;
   }
 }
 @keyframes ce-squash {
-  0% {
-    transform: scale(1.06, 0.9);
+  0%,
+  4% {
+    transform: none;
   }
-  45% {
-    transform: scale(0.97, 1.04);
+  7% {
+    transform: scale(1.1, 0.86);
   }
+  17% {
+    transform: scale(0.95, 1.06);
+  }
+  27%,
+  43% {
+    transform: none;
+  }
+  47% {
+    transform: scale(1.04, 0.94);
+  }
+  56% {
+    transform: scale(0.99, 1.02);
+  }
+  66%,
   100% {
     transform: none;
   }
@@ -386,8 +428,13 @@
     animation: none !important;
     transition: none !important;
   }
-  .ce-px {
+  .ce-emblem svg,
+  .ce-px,
+  .ce-sc {
     translate: none;
+    rotate: none;
+    scale: none;
+    opacity: 1;
   }
   .ce-ripple,
   .ce-splash,
@@ -409,6 +456,11 @@
 .ce-emblem.ce-still .ce-sparks {
   display: none;
 }
-.ce-emblem.ce-still .ce-px {
+.ce-emblem.ce-still svg,
+.ce-emblem.ce-still .ce-px,
+.ce-emblem.ce-still .ce-sc {
   translate: none;
+  rotate: none;
+  scale: none;
+  opacity: 1;
 }
