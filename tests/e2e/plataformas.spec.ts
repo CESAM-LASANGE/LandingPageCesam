@@ -1,41 +1,44 @@
 import { expect, test } from '@playwright/test';
 
-// Pedido da coordenação (2026-10-27): ao rolar até "Plataformas", os cards sobem como se viessem de baixo.
+// Pedido da coordenação (2026-10-27): ao rolar até "Plataformas", os cards sobem de baixo (ScrollAnimation, direção "down").
+const observatorio = (page: import('@playwright/test').Page) =>
+  page.getByRole('link', { name: /O retrato do saneamento/ });
+const portal = (page: import('@playwright/test').Page) =>
+  page.getByRole('link', { name: /Informação para dar o destino certo/ });
 
 test.describe('com movimento liberado', () => {
   test.use({ reducedMotion: 'no-preference' });
 
   test('os cards ficam escondidos abaixo e sobem quando a seção entra na tela', async ({ page }) => {
     await page.goto('/');
-    const cards = page
-      .locator('#plataformas')
-      .locator('a, article')
-      .filter({ hasText: /Observatório|Informação para dar/ });
-    const grid = page.locator('#plataformas [data-estado]');
-    await expect(grid).toHaveAttribute('data-estado', 'oculto');
-    await expect(cards.first()).toHaveCSS('opacity', '0');
+    await expect(observatorio(page).locator('xpath=..')).toHaveCSS('opacity', '0');
+    await expect(portal(page).locator('xpath=..')).toHaveCSS('opacity', '0');
 
     await page.locator('#plataformas').scrollIntoViewIfNeeded();
-    await expect(grid).toHaveAttribute('data-estado', 'visivel');
-    for (const card of await cards.all()) {
-      await expect(card).toHaveCSS('opacity', '1', { timeout: 4000 });
+    await expect(observatorio(page)).toBeVisible();
+    // O wrapper (ScrollAnimation) é quem anima; o card termina visível e na posição final.
+    const slot = (l: ReturnType<typeof observatorio>) => l.locator('xpath=..');
+    for (const card of [observatorio(page), portal(page)]) {
+      await card.scrollIntoViewIfNeeded(); // cada card sobe quando ele próprio é alcançado
+      await expect(slot(card)).toHaveCSS('opacity', '1', { timeout: 4000 });
+      await expect
+        .poll(() => slot(card).evaluate((el) => getComputedStyle(el).transform))
+        .toMatch(/^(none|matrix\(1, 0, 0, 1, 0, 0\))$/);
+      await expect.poll(() => slot(card).evaluate((el) => getComputedStyle(el).filter)).toMatch(/^(none|blur\(0px\))$/);
     }
-    const [a, b] = await Promise.all(
-      (await cards.all()).map((c) => c.evaluate((el) => getComputedStyle(el).translate)),
-    );
-    expect([a, b].map((t) => (t === 'none' ? 0 : parseFloat(t!.split(' ').pop()!)))).toEqual([0, 0]);
   });
 
   test('o card segue clicável e acessível depois de subir', async ({ page }) => {
     await page.goto('/');
     await page.locator('#plataformas').scrollIntoViewIfNeeded();
-    await expect(page.getByRole('link', { name: /O retrato do saneamento/ })).toBeVisible();
-    await expect(page.getByRole('link', { name: /Informação para dar o destino certo/ })).toBeVisible();
+    await expect(observatorio(page)).toBeVisible();
+    await expect(portal(page)).toBeVisible();
   });
 });
 
-test('com movimento reduzido os cards ficam visíveis e parados, sem gatilho', async ({ page }) => {
+test('com movimento reduzido os cards ficam visíveis, sem deslocamento', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('#plataformas [data-estado]')).toHaveCount(0);
-  await expect(page.getByRole('link', { name: /O retrato do saneamento/ })).toHaveCSS('opacity', '1');
+  await page.locator('#plataformas').scrollIntoViewIfNeeded();
+  await expect(observatorio(page).locator('xpath=..')).toHaveCSS('opacity', '1', { timeout: 4000 });
+  await expect(portal(page)).toBeVisible();
 });

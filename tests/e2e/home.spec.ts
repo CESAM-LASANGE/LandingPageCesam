@@ -106,6 +106,15 @@ test.describe('Navegação por viewport', () => {
         }),
       ),
     );
+    // Gatilhos de rolagem (cards de Plataformas): rola a página toda para que tudo apareça antes da captura.
+    await page.evaluate(async () => {
+      for (let y = 0; y <= document.body.scrollHeight; y += 400) {
+        window.scrollTo({ top: y, behavior: 'instant' });
+        await new Promise((r) => setTimeout(r, 120));
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      await new Promise((r) => setTimeout(r, 800));
+    });
     await expect(page).toHaveScreenshot('home.png', { fullPage: true });
   });
 });

@@ -1,8 +1,8 @@
 import { platforms } from '@/content/site';
 import { buildTiles } from '@/lib/tiles';
 import { Icon } from './Icon';
-import { RevelarAoRolar } from './RevelarAoRolar';
 import { SectionHeader } from './SectionHeader';
+import ScrollAnimation from './ui/scroll-animation';
 import styles from './Platforms.module.css';
 
 const tiles = buildTiles();
@@ -69,70 +69,79 @@ export function Platforms() {
           title={platforms.title}
           aside={<p className="lead">{platforms.lead}</p>}
         />
-        <RevelarAoRolar className={styles.grid}>
-          <a href={obs.href} target="_blank" rel="noopener noreferrer" className={`lift ${styles.card} ${styles.obs}`}>
-            <span className={styles.shine} aria-hidden="true" />
-            <div className={styles.row}>
-              <span className={styles.obsLogo}>
-                {/* eslint-disable-next-line @next/next/no-img-element -- SVG estático */}
-                <img src="/images/observatorio-logo.svg" alt={obs.name} width={170} height={40} />
-              </span>
-              <span className={styles.squareIcon}>
-                <Icon name="arrowUpRight" size={20} strokeWidth={2.2} className="go" />
-              </span>
-            </div>
-            <div className={styles.text}>
-              <h3 className={styles.obsTitle}>{obs.title}</h3>
-              <p className={styles.obsText}>
-                <span className={styles.long}>{obs.text}</span>
-                <span className={styles.short}>{obs.shortText}</span>
-              </p>
-            </div>
-            <div className={styles.data}>
-              <div className={styles.tiles} aria-hidden="true">
-                {tiles.map((t, i) => (
-                  <span key={i} className={styles.tile} style={{ background: t.color, animationDelay: t.delay }} />
-                ))}
-              </div>
-              <dl className={styles.figures}>
-                {obs.figures.map((f) => (
-                  <div key={f.label}>
-                    <dt className="visually-hidden">{f.label}</dt>
-                    <dd className={styles.figure} data-long={f.value.length > 4 || undefined}>
-                      {f.value}
-                    </dd>
-                    <dd className={styles.figureLabel} aria-hidden="true">
-                      {f.label}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-            <ul className={styles.themes}>
-              {obs.themes.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-            <span className={styles.obsCta}>
-              {obs.cta} <span className="go">→</span>
-            </span>
-            <span className="visually-hidden"> (abre em nova aba)</span>
-          </a>
-
-          {residuos.href ? (
+        <div className={styles.grid}>
+          <ScrollAnimation className={styles.slot} viewport={{ amount: 0.2, margin: '0px 0px -80px 0px' }}>
             <a
-              href={residuos.href}
+              href={obs.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`lift ${styles.card} ${styles.res}`}
+              className={`lift ${styles.card} ${styles.obs}`}
             >
-              {residuosBody}
+              <span className={styles.shine} aria-hidden="true" />
+              <div className={styles.row}>
+                <span className={styles.obsLogo}>
+                  {/* eslint-disable-next-line @next/next/no-img-element -- SVG estático */}
+                  <img src="/images/observatorio-logo.svg" alt={obs.name} width={170} height={40} />
+                </span>
+                <span className={styles.squareIcon}>
+                  <Icon name="arrowUpRight" size={20} strokeWidth={2.2} className="go" />
+                </span>
+              </div>
+              <div className={styles.text}>
+                <h3 className={styles.obsTitle}>{obs.title}</h3>
+                <p className={styles.obsText}>
+                  <span className={styles.long}>{obs.text}</span>
+                  <span className={styles.short}>{obs.shortText}</span>
+                </p>
+              </div>
+              <div className={styles.data}>
+                <div className={styles.tiles} aria-hidden="true">
+                  {tiles.map((t, i) => (
+                    <span key={i} className={styles.tile} style={{ background: t.color, animationDelay: t.delay }} />
+                  ))}
+                </div>
+                <dl className={styles.figures}>
+                  {obs.figures.map((f) => (
+                    <div key={f.label}>
+                      <dt className="visually-hidden">{f.label}</dt>
+                      <dd className={styles.figure} data-long={f.value.length > 4 || undefined}>
+                        {f.value}
+                      </dd>
+                      <dd className={styles.figureLabel} aria-hidden="true">
+                        {f.label}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+              <ul className={styles.themes}>
+                {obs.themes.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+              <span className={styles.obsCta}>
+                {obs.cta} <span className="go">→</span>
+              </span>
               <span className="visually-hidden"> (abre em nova aba)</span>
             </a>
-          ) : (
-            <article className={`${styles.card} ${styles.res}`}>{residuosBody}</article>
-          )}
-        </RevelarAoRolar>
+          </ScrollAnimation>
+
+          <ScrollAnimation className={styles.slot} delay={0.18} viewport={{ amount: 0.2, margin: '0px 0px -80px 0px' }}>
+            {residuos.href ? (
+              <a
+                href={residuos.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`lift ${styles.card} ${styles.res}`}
+              >
+                {residuosBody}
+                <span className="visually-hidden"> (abre em nova aba)</span>
+              </a>
+            ) : (
+              <article className={`${styles.card} ${styles.res}`}>{residuosBody}</article>
+            )}
+          </ScrollAnimation>
+        </div>
       </div>
     </section>
   );

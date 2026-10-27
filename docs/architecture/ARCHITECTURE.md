@@ -37,3 +37,7 @@ A decisão deve considerar frequência de atualização e quem manterá o site.
 ## ADRs
 
 Decisões arquiteturais relevantes devem ser registradas em `docs/architecture/ADR/`.
+
+## Dependências de interface
+
+- `motion` (2026-10-27): usado só em `components/ui/scroll-animation.tsx` (gatilho de rolagem dos cards de Plataformas), via `LazyMotion` + `domAnimation`. Custo medido: cerca de +37 KiB de JavaScript (gzip, soma de todos os chunks) frente a um efeito equivalente em CSS/IntersectionObserver (0 KiB). Aceito pela coordenação; se o peso virar problema, trocar pelo `IntersectionObserver` + CSS (commit `2831cfd`).

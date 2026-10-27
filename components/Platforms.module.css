@@ -7,26 +7,12 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-/* Gatilho de rolagem (RevelarAoRolar): os cards sobem de baixo, um depois do outro. */
-.grid[data-estado='oculto'] > .card {
-  opacity: 0;
-  translate: 0 72px;
+/* Cada card fica dentro de um ScrollAnimation (gatilho de rolagem); o card preenche a altura da célula. */
+.slot {
+  display: flex;
 }
-.grid[data-estado='visivel'] > .card {
-  animation: subir 0.95s var(--ease-out) both;
-}
-.grid[data-estado='visivel'] > .card:nth-child(2) {
-  animation-delay: 0.18s;
-}
-@keyframes subir {
-  from {
-    opacity: 0;
-    translate: 0 72px;
-  }
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
+.slot > .card {
+  flex: 1;
 }
 .card {
   position: relative;
