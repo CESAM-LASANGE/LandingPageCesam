@@ -1,0 +1,414 @@
+/* Emblema animado do CESAM (arte fornecida pela coordenação, 2026-10-27). Classes com prefixo ce-. */
+/* ===== CESAM · emblema animado ===== */
+.ce-emblem {
+  --ce-green: #177a35;
+  --ce-blue: #6fa3ef;
+  --ce-sky: #eef4fd;
+  --ce-yellow: #f2d52b;
+  --ce-ink: #0f1411;
+  --ce-paper: #ffffff;
+  --ce-streak: #b4bab6;
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 1/1;
+  margin-inline: auto;
+}
+.ce-emblem svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.ce-emblem * {
+  transform-box: view-box;
+}
+.ce-px {
+  translate: calc(var(--mx, 0) * var(--d, 0) * 1px) calc(var(--my, 0) * var(--d, 0) * 1px);
+  transition: translate 0.12s linear;
+}
+
+/* --- entrada (uma vez) --- */
+.ce-emblem.is-intro .ce-disc {
+  animation: ce-disc 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.ce-emblem.is-intro .ce-gear-in {
+  animation: ce-gear-spin 1.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+  transform-origin: 300px 300px;
+}
+.ce-emblem.is-intro .ce-gear-line {
+  stroke-dasharray: 1;
+  animation: ce-draw 1.3s cubic-bezier(0.65, 0, 0.35, 1) 0.1s both;
+}
+.ce-emblem.is-intro .ce-gear-fill {
+  animation: ce-fade 0.6s ease 0.7s both;
+}
+.ce-emblem.is-intro .ce-hole {
+  animation: ce-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ce-emblem.is-intro .ce-hole:nth-child(1) {
+  animation-delay: 0.9s;
+}
+.ce-emblem.is-intro .ce-hole:nth-child(2) {
+  animation-delay: 1s;
+}
+.ce-emblem.is-intro .ce-hole:nth-child(3) {
+  animation-delay: 1.1s;
+}
+.ce-emblem.is-intro .ce-hole:nth-child(4) {
+  animation-delay: 1.2s;
+}
+.ce-emblem.is-intro .ce-leaf-in {
+  animation: ce-leaf 0.95s cubic-bezier(0.34, 1.4, 0.64, 1) 0.35s both;
+  transform-origin: 170px 392px;
+}
+.ce-emblem.is-intro .ce-vein {
+  animation: ce-grow-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1.05s both;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.ce-emblem.is-intro .ce-drop-in {
+  animation: ce-drop-fall 0.7s cubic-bezier(0.55, 0, 1, 0.45) 0.55s both;
+}
+.ce-emblem.is-intro .ce-drop-squash {
+  animation: ce-squash 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) 1.25s both;
+  transform-origin: 285px 388px;
+}
+.ce-emblem.is-intro .ce-shine {
+  animation: ce-fade 0.5s ease 1.55s both;
+}
+.ce-emblem.is-intro .ce-splash circle {
+  animation: ce-splash 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 1.25s both;
+  transform-origin: 285px 300px;
+}
+.ce-emblem.is-intro .ce-splash circle + circle {
+  animation-delay: 1.45s;
+}
+.ce-emblem.is-intro .ce-wipe {
+  animation: ce-wipe 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+}
+.ce-emblem.is-intro .ce-rib-in {
+  animation: ce-wind 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ce-emblem.is-intro #ce-clip-a .ce-wipe,
+.ce-emblem.is-intro .ce-r1 .ce-rib-in {
+  animation-delay: 1.15s;
+}
+.ce-emblem.is-intro #ce-clip-b .ce-wipe,
+.ce-emblem.is-intro .ce-r2 .ce-rib-in {
+  animation-delay: 1.3s;
+}
+.ce-emblem.is-intro #ce-clip-c .ce-wipe,
+.ce-emblem.is-intro .ce-r3 .ce-rib-in {
+  animation-delay: 1.45s;
+}
+.ce-emblem.is-intro .ce-star-in {
+  animation: ce-star 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) 2.05s both;
+  transform-origin: 341px 340px;
+}
+.ce-emblem.is-intro .ce-sparks {
+  animation: ce-spark 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 2.35s both;
+  transform-origin: 341px 340px;
+}
+
+/* --- respiração contínua (depois da entrada) --- */
+.ce-float {
+  animation: ce-float 7s ease-in-out 2.8s infinite;
+}
+.ce-gear-idle {
+  animation: ce-tick 12s ease-in-out 2.8s infinite;
+  transform-origin: 300px 300px;
+}
+.ce-r1 .ce-rib-idle {
+  animation: ce-wave 6s ease-in-out 2.8s infinite;
+  transform-origin: 54px 103px;
+}
+.ce-r2 .ce-rib-idle {
+  animation: ce-wave 6s ease-in-out 3.3s infinite;
+  transform-origin: 22px 145px;
+}
+.ce-r3 .ce-rib-idle {
+  animation: ce-wave 6s ease-in-out 3.8s infinite;
+  transform-origin: 57px 250px;
+}
+.ce-streak {
+  stroke-dasharray: 0.55 0.45;
+  animation: ce-flow 4.5s linear 2.8s infinite;
+}
+.ce-shine-idle {
+  animation: ce-glint 6s ease-in-out 3.2s infinite;
+}
+.ce-ripple circle {
+  opacity: 0;
+  animation: ce-ripple 7s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  transform-origin: 285px 300px;
+}
+.ce-ripple circle:nth-child(1) {
+  animation-delay: 3.6s;
+}
+.ce-ripple circle:nth-child(2) {
+  animation-delay: 4.2s;
+}
+.ce-star-idle {
+  animation: ce-twinkle 7s ease-in-out 4.5s infinite;
+  transform-origin: 341px 340px;
+}
+
+@keyframes ce-disc {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ce-gear-spin {
+  from {
+    transform: rotate(-38deg);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes ce-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ce-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes ce-pop {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ce-leaf {
+  from {
+    opacity: 0;
+    transform: rotate(-28deg) scale(0.25);
+  }
+  40% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ce-grow-up {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ce-drop-fall {
+  from {
+    opacity: 0;
+    transform: translateY(-170px);
+  }
+  25% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ce-squash {
+  0% {
+    transform: scale(1.06, 0.9);
+  }
+  45% {
+    transform: scale(0.97, 1.04);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes ce-splash {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  8% {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+@keyframes ce-wipe {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes ce-wind {
+  from {
+    transform: translateX(-46px);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes ce-star {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-144deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ce-spark {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+@keyframes ce-float {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+@keyframes ce-tick {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+@keyframes ce-wave {
+  0%,
+  100% {
+    transform: none;
+  }
+  35% {
+    transform: translateY(-3px) rotate(-0.9deg);
+  }
+  70% {
+    transform: translateY(2px) rotate(0.5deg);
+  }
+}
+@keyframes ce-flow {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: -1;
+  }
+}
+@keyframes ce-glint {
+  0%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.35;
+  }
+  88% {
+    opacity: 1;
+  }
+}
+@keyframes ce-ripple {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  6% {
+    opacity: 0.5;
+  }
+  45%,
+  100% {
+    opacity: 0;
+    transform: scale(1.16);
+  }
+}
+@keyframes ce-twinkle {
+  0%,
+  82%,
+  100% {
+    transform: none;
+  }
+  88% {
+    transform: scale(1.28) rotate(36deg);
+  }
+  94% {
+    transform: scale(0.94) rotate(72deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ce-emblem *,
+  .ce-emblem *::before {
+    animation: none !important;
+    transition: none !important;
+  }
+  .ce-px {
+    translate: none;
+  }
+  .ce-ripple,
+  .ce-splash,
+  .ce-sparks {
+    display: none;
+  }
+}
+.ce-emblem.is-paused *,
+.ce-emblem.is-offscreen * {
+  animation-play-state: paused !important;
+}
+.ce-emblem.ce-still * {
+  animation: none !important;
+  transition: none !important;
+}
+
+.ce-emblem.ce-still .ce-ripple,
+.ce-emblem.ce-still .ce-splash,
+.ce-emblem.ce-still .ce-sparks {
+  display: none;
+}
+.ce-emblem.ce-still .ce-px {
+  translate: none;
+}

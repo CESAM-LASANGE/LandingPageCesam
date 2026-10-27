@@ -188,3 +188,12 @@ describe('Hero · eyebrow (pedido da coordenação, 2026-10-09)', () => {
     expect(container.querySelector('#inicio p.eyebrow svg')).toBeNull();
   });
 });
+
+describe('Hero · emblema animado (pedido da coordenação, 2026-10-27)', () => {
+  it('mostra o emblema animado do CESAM, com título acessível', () => {
+    const { container } = renderPage();
+    const emblema = container.querySelector('#inicio .ce-emblem');
+    expect(emblema).not.toBeNull();
+    expect(emblema?.querySelector('svg[role="img"] title')).toHaveTextContent('Símbolo do CESAM');
+  });
+});
