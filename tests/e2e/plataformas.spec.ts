@@ -28,6 +28,19 @@ test.describe('com movimento liberado', () => {
     }
   });
 
+  test('a animação repete: ao sair da tela e voltar, os cards sobem de novo', async ({ page }) => {
+    await page.goto('/');
+    const slot = observatorio(page).locator('xpath=..');
+    await page.locator('#plataformas').scrollIntoViewIfNeeded();
+    await expect(slot).toHaveCSS('opacity', '1', { timeout: 4000 });
+
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await expect(slot).toHaveCSS('opacity', '0', { timeout: 4000 }); // saiu da tela: volta a ficar escondido
+
+    await page.locator('#plataformas').scrollIntoViewIfNeeded();
+    await expect(slot).toHaveCSS('opacity', '1', { timeout: 4000 }); // entrou de novo: sobe outra vez
+  });
+
   test('o card segue clicável e acessível depois de subir', async ({ page }) => {
     await page.goto('/');
     await page.locator('#plataformas').scrollIntoViewIfNeeded();

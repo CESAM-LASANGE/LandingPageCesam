@@ -34,7 +34,7 @@ interface ScrollAnimationProps extends Omit<HTMLMotionProps<'div'>, 'children' |
 }
 
 /**
- * Gatilho de rolagem (usa `LazyMotion` para carregar só o necessário): ao entrar na tela, o conteúdo surge (desfoque e opacidade) vindo da direção indicada.
+ * Gatilho de rolagem, repetido a cada entrada na tela (usa `LazyMotion` para carregar só o necessário): ao entrar na tela, o conteúdo surge (desfoque e opacidade) vindo da direção indicada.
  * Respeita "reduzir movimento" do sistema (o deslocamento é desligado; só a opacidade aparece).
  */
 const ScrollAnimation = forwardRef<HTMLDivElement, ScrollAnimationProps>(
@@ -56,7 +56,7 @@ const ScrollAnimation = forwardRef<HTMLDivElement, ScrollAnimationProps>(
             whileInView="visible"
             initial="hidden"
             variants={comAtraso}
-            viewport={{ once: true, ...viewport }}
+            viewport={{ once: false, ...viewport }}
             className={cn(className)}
             {...rest}
           >
