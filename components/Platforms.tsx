@@ -1,6 +1,7 @@
 import { platforms } from '@/content/site';
 import { buildTiles } from '@/lib/tiles';
 import { Icon } from './Icon';
+import { RevelarAoRolar } from './RevelarAoRolar';
 import { SectionHeader } from './SectionHeader';
 import styles from './Platforms.module.css';
 
@@ -68,13 +69,8 @@ export function Platforms() {
           title={platforms.title}
           aside={<p className="lead">{platforms.lead}</p>}
         />
-        <div className={styles.grid}>
-          <a
-            href={obs.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`lift reveal ${styles.card} ${styles.obs}`}
-          >
+        <RevelarAoRolar className={styles.grid}>
+          <a href={obs.href} target="_blank" rel="noopener noreferrer" className={`lift ${styles.card} ${styles.obs}`}>
             <span className={styles.shine} aria-hidden="true" />
             <div className={styles.row}>
               <span className={styles.obsLogo}>
@@ -128,15 +124,15 @@ export function Platforms() {
               href={residuos.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`lift reveal ${styles.card} ${styles.res}`}
+              className={`lift ${styles.card} ${styles.res}`}
             >
               {residuosBody}
               <span className="visually-hidden"> (abre em nova aba)</span>
             </a>
           ) : (
-            <article className={`reveal ${styles.card} ${styles.res}`}>{residuosBody}</article>
+            <article className={`${styles.card} ${styles.res}`}>{residuosBody}</article>
           )}
-        </div>
+        </RevelarAoRolar>
       </div>
     </section>
   );
