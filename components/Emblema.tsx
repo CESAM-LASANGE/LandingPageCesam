@@ -9,7 +9,7 @@ const peca = (vars: Record<string, string | number>, origem?: string) =>
 
 /**
  * Emblema animado do CESAM no início da página: entrada única, respiração contínua e profundidade com o mouse.
- * Respeita "reduzir movimento" (CSS), desmonta com a rolagem e pausa quando sai da tela.
+ * Respeita "reduzir movimento" (CSS), desmonta e monta em pontos da rolagem e pausa quando sai da tela.
  */
 export function Emblema() {
   const raiz = useRef<HTMLDivElement>(null);
@@ -44,24 +44,38 @@ export function Emblema() {
       ty = 0;
       if (!quadro) quadro = requestAnimationFrame(animar);
     };
-    // rolagem: desmonta o emblema ao descer e monta ao subir
+    // Rolagem: ao descer até o ponto em que o emblema começa a ser cortado, ele se desmonta sozinho (animação
+    // de ~1,1 s); ao subir de volta a um ponto um pouco acima, ele se monta de novo. Os dois pontos são
+    // diferentes (histerese) para não ficar alternando perto do limite.
+    const DURACAO = 1100;
     let p = 0;
-    let alvo = 0;
+    let desmontado = false;
     let quadroRolagem = 0;
-    const calcularAlvo = () => {
-      if (parado.matches) return 0;
-      const topo = el.getBoundingClientRect().top + window.scrollY;
-      return Math.max(0, Math.min(1, window.scrollY / Math.max(240, topo + el.offsetHeight * 0.55)));
-    };
-    const animarRolagem = () => {
-      p += (alvo - p) * 0.14;
-      if (Math.abs(alvo - p) < 0.001) p = alvo;
-      svg.style.setProperty('--p', p.toFixed(4));
-      quadroRolagem = p !== alvo ? requestAnimationFrame(animarRolagem) : 0;
+    const suave = (u: number) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+    const levarPara = (destino: number) => {
+      cancelAnimationFrame(quadroRolagem);
+      const origem = p;
+      const inicio = performance.now();
+      const passo = (agora: number) => {
+        const u = Math.min(1, (agora - inicio) / DURACAO);
+        p = origem + (destino - origem) * suave(u);
+        svg.style.setProperty('--p', p.toFixed(4));
+        quadroRolagem = u < 1 ? requestAnimationFrame(passo) : 0;
+      };
+      quadroRolagem = requestAnimationFrame(passo);
     };
     const aoRolar = () => {
-      alvo = calcularAlvo();
-      if (!quadroRolagem) quadroRolagem = requestAnimationFrame(animarRolagem);
+      if (parado.matches) return;
+      const topo = el.getBoundingClientRect().top + window.scrollY;
+      const descer = Math.max(topo, 120);
+      const subir = Math.max(descer - 140, 40);
+      if (!desmontado && window.scrollY >= descer) {
+        desmontado = true;
+        levarPara(1);
+      } else if (desmontado && window.scrollY <= subir) {
+        desmontado = false;
+        levarPara(0);
+      }
     };
     window.addEventListener('scroll', aoRolar, { passive: true });
     window.addEventListener('resize', aoRolar);
