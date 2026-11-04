@@ -41,6 +41,8 @@ export type Noticia = {
   /** Até 200 caracteres: aparece no card e na meta description. */
   resumo: string;
   capa: FotoNoticia;
+  /** Se existir, a página mostra estas fotos em carrossel no lugar da capa (a capa segue no card e na pré-visualização). */
+  capaCarrossel?: FotoNoticia[];
   corpo: BlocoNoticia[];
   galeria?: FotoNoticia[];
 };
@@ -52,6 +54,9 @@ const titulo = (texto: string): BlocoNoticia => ({ tipo: 'titulo', texto });
  * PENDENTE-VALIDACAO (textos escritos pelo agente a partir do material enviado; a coordenação deve revisar):
  * - TCC: data da defesa (01/10/2026, informada pela coordenação);
  * - composição da banca (conforme a folha de aprovação do TCC: Profa. Jéssica Ferreira da Silva e Prof. Nelison Ferreira Correa);
+ * - Apresentações do PGRN (03/11/2026): data tirada dos metadados das fotos; "Avaliadores" lido a partir da programação enviada
+ *   (a coordenação confirma se são a banca); temas de João Victor, Dayane e Katia lidos de trechos dos slides nas fotos;
+ *   títulos dos projetos de Bruna e Elias informados pela coordenação; descrição do PGRN vinda do site da UEMS;
  * - nomes das pessoas que aparecem nas fotos (a coordenação decidiu não identificá-las por enquanto);
  * - Curso de geoprocessamento (08/06/2026, informado pela coordenação): PMA = Polícia Militar Ambiental (confirmado);
  *   faltam carga horária, número de participantes e conteúdo programático (o texto não os cita);
@@ -59,6 +64,92 @@ const titulo = (texto: string): BlocoNoticia => ({ tipo: 'titulo', texto });
  *   banner do centro); PMA = Polícia Militar Ambiental (confirmado); o texto não cita conteúdo nem carga horária.
  */
 export const noticias: Noticia[] = [
+  {
+    slug: 'apresentacoes-pgrn-orientandos-do-prof-vinicius',
+    titulo: 'Orientandos do Prof. Vinícius apresentam pesquisas de mestrado e doutorado do PGRN',
+    data: '2026-11-03',
+    categoria: 'pesquisa',
+    resumo:
+      'Cinco orientandos do Prof. Vinícius Ribeiro apresentaram seus projetos de mestrado e doutorado do PGRN/UEMS, com foco nas dimensões ambientais, sociais e de governança.',
+    capa: {
+      arquivo: 'noticias/pgrn-capa',
+      alt: 'Elias de camisa azul do CESAM, com um controle de slides na mão levantada, falando ao microfone durante sua apresentação no PGRN.',
+      foco: '50% 35%',
+    },
+    corpo: [
+      p(
+        'No dia 3 de novembro de 2026, cinco estudantes do Programa de Pós-Graduação em Recursos Naturais (PGRN) da Universidade Estadual de Mato Grosso do Sul (UEMS), em Dourados, apresentaram seus projetos de mestrado e de doutorado. Todos são orientados pelo Prof. Dr. Vinícius de Oliveira Ribeiro, professor do programa e coordenador do CESAM.',
+      ),
+      p(
+        'Uma das perguntas que as apresentações buscaram responder foi: quais são as dimensões ambientais, sociais e de governança de cada projeto? Essas três dimensões, conhecidas pela sigla ESG (em inglês), ajudam a mostrar que uma pesquisa em saneamento e recursos naturais vai além dos resultados técnicos: ela se relaciona com a proteção do ambiente, com as pessoas atendidas e com a forma como as decisões são tomadas.',
+      ),
+      titulo('O que é o PGRN'),
+      p(
+        'O PGRN é o programa de pós-graduação stricto sensu da UEMS, com mestrado e doutorado, que forma pesquisadores e profissionais para o desenvolvimento sustentável e a conservação dos recursos naturais, em especial nos biomas Cerrado e Pantanal. Suas linhas de pesquisa são Ecologia e Conservação da Biodiversidade; Bioprospecção, Biotecnologia e Desenvolvimento de Bioprodutos; Tecnologias e Inovação em Recursos Naturais; e Sociedade, Cultura e Recursos Naturais.',
+      ),
+      titulo('O orientador'),
+      p(
+        'O Prof. Dr. Vinícius de Oliveira Ribeiro é doutor em Saneamento Ambiental e Recursos Hídricos, atua na Engenharia Ambiental e Sanitária da UEMS e no PGRN, e trabalha com saneamento, recursos hídricos e geotecnologias. Coordena o CESAM, o Centro de Estudos em Saneamento Ambiental da universidade.',
+      ),
+      titulo('As apresentações, na ordem em que aconteceram'),
+      titulo('13h30 · João Victor Maciel de Andrade Silva (doutorado, turma de 2023)'),
+      p(
+        'Avaliadores: Prof. Dr. Nelison Ferreira Correa e Profa. Dra. Ana Carolina Correia de Oliveira Gomes. O slide mostrado no telão trata do uso de resíduos de construção e demolição (RCD) em pavers permeáveis e de sua contribuição para a drenagem urbana.',
+      ),
+      titulo('14h20 · Dayane Aparecida de Oliveira Costa (mestrado, turma de 2026)'),
+      p(
+        'Avaliadores: Prof. Dr. Nelison Ferreira Correa e Profa. Dra. Ana Carolina Correia de Oliveira Gomes. A pesquisa apresentada aborda a vegetação e a proteção de nascentes em um parque natural municipal, na Mata Atlântica, com atenção às áreas de preservação permanente e à relação do tema com os Objetivos de Desenvolvimento Sustentável (ODS).',
+      ),
+      titulo('15h10 · Katia Cristina Silva Mineli (doutorado, turma de 2026)'),
+      p(
+        'Avaliadores: Prof. Dr. Nelison Ferreira Correa e Profa. Dra. Ana Carolina Correia de Oliveira Gomes. Os slides da apresentação tratam de estratégias de gestão de resíduos, emissões e governança, tema ligado à descarbonização.',
+      ),
+      titulo('15h50 · Bruna Alves de Souza Oliveira (mestrado, turma de 2025)'),
+      p(
+        'Avaliadores: Prof. Dr. Nelison Ferreira Correa e Prof. Dr. Marcus Vinícius Galbetti. Bruna integra a equipe do CESAM e apresentou o projeto “Sensibilidade da disponibilidade hídrica superficial remanescente às premissas de análise de outorga em UPGs da Bacia do Rio Paraná, Mato Grosso do Sul”.',
+      ),
+      titulo('16h20 · Elias de Oliveira Júnior (mestrado, turma de 2025)'),
+      p(
+        'Avaliadores: Prof. Dr. Nelison Ferreira Correa e Profa. Dra. Shaline Séfara Lopes Fernandes. Elias também integra a equipe do CESAM, onde ministra cursos de extensão ao lado do Prof. Nelison, e apresentou o projeto “Sensor Hidrométrico de Baixo Custo para Monitoramento dos Níveis Estático e Dinâmico em Poços”.',
+      ),
+      titulo('Pesquisa que forma pessoas'),
+      p(
+        'Momentos como esse fazem parte da formação de mestres e doutores: a pesquisa é apresentada, discutida com professores de outras linhas e aperfeiçoada. As publicações do CESAM e de seus integrantes estão na seção Publicações.',
+      ),
+    ],
+    capaCarrossel: [
+      {
+        arquivo: 'noticias/pgrn-joao-victor-capa',
+        ajuste: 'conter',
+        alt: 'João Victor falando ao microfone, de camisa jeans, diante de um slide sobre o uso de resíduos de construção e demolição em pavers permeáveis.',
+        legenda: 'João Victor Maciel de Andrade Silva',
+      },
+      {
+        arquivo: 'noticias/pgrn-dayane-capa',
+        ajuste: 'conter',
+        alt: 'Dayane falando ao microfone ao lado de um notebook sobre a bancada, com o slide sobre vegetação e proteção da nascente projetado atrás.',
+        legenda: 'Dayane Aparecida de Oliveira Costa',
+      },
+      {
+        arquivo: 'noticias/pgrn-katia-capa',
+        ajuste: 'conter',
+        alt: 'Katia de blusa preta e óculos, segurando o microfone diante de um slide sobre gestão de resíduos e emissões, atrás da bancada com o nome UEMS.',
+        legenda: 'Katia Cristina Silva Mineli',
+      },
+      {
+        arquivo: 'noticias/pgrn-bruna-capa',
+        ajuste: 'conter',
+        alt: 'Bruna de cabelos cacheados e camisa azul do CESAM, em pé atrás da bancada com o nome UEMS durante sua apresentação.',
+        legenda: 'Bruna Alves de Souza Oliveira',
+      },
+      {
+        arquivo: 'noticias/pgrn-elias-capa',
+        ajuste: 'conter',
+        alt: 'Elias de camisa azul do CESAM, gesticulando com o microfone na mão, atrás da bancada com o nome UEMS durante sua apresentação.',
+        legenda: 'Elias de Oliveira Júnior',
+      },
+    ],
+  },
   {
     slug: 'tcc-ana-laura-papel-higienico-no-vaso-sanitario',
     titulo: 'Ana Laura Eich defende TCC sobre papel higiênico no vaso sanitário',

@@ -49,6 +49,39 @@
 .capa {
   margin-top: 32px;
 }
+.capaCarrossel {
+  position: relative;
+  margin-top: 32px;
+  aspect-ratio: 16 / 10;
+  max-height: 560px;
+  width: 100%;
+}
+.slideFoto {
+  position: relative;
+  height: 100%;
+  margin: 0;
+}
+/* Nome da pessoa sobre gradiente escuro; deixa espaço para os controles à direita. */
+.legendaSobre {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 48px 20px 18px;
+  padding-right: 200px;
+  background: linear-gradient(to top, rgba(15, 20, 17, 0.82), rgba(15, 20, 17, 0));
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+@media (max-width: 599px) {
+  .capaCarrossel {
+    aspect-ratio: 4 / 5;
+  }
+  .legendaSobre {
+    padding-right: 20px;
+    padding-bottom: 68px;
+  }
+}
 .figura {
   margin: 0;
   min-width: 0;
