@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { dataPorExtenso, ROTULO_CATEGORIA, type FotoNoticia, type Noticia } from '@/content/noticias';
 import { fotoDoManifesto } from '@/lib/fotos';
+import { Carousel } from './Carousel';
 import { CompartilharNoticia } from './CompartilharNoticia';
 import { Foto } from './Foto';
 import { NoticiaCard } from './NoticiaCard';
@@ -66,7 +67,33 @@ export function NoticiaArtigo({ noticia, outras }: Props) {
           <p className={styles.resumo}>{noticia.resumo}</p>
         </header>
 
-        <Figura foto={noticia.capa} sizes="(min-width: 1100px) 1080px, 100vw" className={styles.capa} />
+        {noticia.capaCarrossel ? (
+          // Várias fotos no lugar da capa: carrossel acessível da SPEC-002, com o nome de cada pessoa na legenda.
+          <div className={styles.capaCarrossel}>
+            <Carousel
+              rotulo={`Fotos da notícia: ${noticia.titulo}`}
+              variante="fotos"
+              nomeItem="foto"
+              itens={noticia.capaCarrossel.map((foto) => ({
+                id: foto.arquivo,
+                conteudo: (
+                  <figure className={styles.slideFoto}>
+                    <Foto
+                      arquivo={foto.arquivo}
+                      alt={foto.alt}
+                      ajuste={foto.ajuste}
+                      foco={foto.foco}
+                      sizes="(min-width: 1100px) 1080px, 100vw"
+                    />
+                    {foto.legenda && <figcaption className={styles.legendaSobre}>{foto.legenda}</figcaption>}
+                  </figure>
+                ),
+              }))}
+            />
+          </div>
+        ) : (
+          <Figura foto={noticia.capa} sizes="(min-width: 1100px) 1080px, 100vw" className={styles.capa} />
+        )}
 
         <div className={styles.texto}>
           {noticia.corpo.map((bloco, i) =>

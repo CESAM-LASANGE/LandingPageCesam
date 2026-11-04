@@ -99,14 +99,27 @@
 /* Variante cards: trilho deslizante, um card por vez (SPEC-007). */
 /* A margem negativa compensa o espaçamento interno dos slides (12 px), alinhando o primeiro card ao título da seção. */
 .cards {
+  --por-vez: 1;
   overflow: hidden;
   margin-inline: -12px;
+}
+/* Quantos cards cabem por vez vem do CSS (já correto no HTML antes da hidratação); `itensPorVez` sobrescreve inline. */
+@media (min-width: 700px) {
+  .cards:not([style*='--por-vez']) {
+    --por-vez: 2;
+  }
+}
+@media (min-width: 1100px) {
+  .cards:not([style*='--por-vez']) {
+    --por-vez: 3;
+  }
 }
 .cards .trilho {
   display: flex;
   transition: transform 0.6s var(--ease-out);
 }
 .cards .slide {
+  flex: 0 0 calc(100% / var(--por-vez));
   flex-shrink: 0;
   padding-inline: 12px;
 }

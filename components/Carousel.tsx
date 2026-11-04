@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from 'react';
 import {
   deveAvancarSozinho,
   INTERVALO_PADRAO_MS,
@@ -81,7 +81,8 @@ export function Carousel({
   const raiz = useRef<HTMLElement>(null);
   const [naTela, setNaTela] = useState(false);
   // Gate 6: só monta (e baixa) os itens visíveis e, com o carrossel na tela, os próximos.
-  const [montados, setMontados] = useState<ReadonlySet<number>>(() => new Set([0]));
+  // Nos cards, os 3 primeiros já vêm no HTML (a largura da tela só é conhecida depois da hidratação): evita salto de layout.
+  const [montados, setMontados] = useState<ReadonlySet<number>>(() => new Set(variante === 'cards' ? [0, 1, 2] : [0]));
 
   const ultima = ultimaPosicao(total, porVez);
   const atual = Math.min(posicao, ultima);
@@ -131,6 +132,7 @@ export function Carousel({
       className={[styles.carrossel, styles[variante], className].filter(Boolean).join(' ')}
       aria-roledescription="carrossel"
       aria-label={rotulo}
+      style={variante === 'cards' && itensPorVez ? ({ '--por-vez': itensPorVez } as CSSProperties) : undefined}
       onMouseEnter={() => setMouseSobre(true)}
       onMouseLeave={() => setMouseSobre(false)}
       onFocus={() => setFocoDentro(true)}
@@ -164,7 +166,6 @@ export function Carousel({
               aria-label={`${indice + 1} de ${total}`}
               className={styles.slide}
               data-ativo={visivel || undefined}
-              style={variante === 'cards' ? { flexBasis: `${100 / porVez}%` } : undefined}
               inert={!visivel}
             >
               {montados.has(indice) || visivel ? item.conteudo : null}
